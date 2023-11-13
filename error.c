@@ -15,6 +15,8 @@
 void    error(t_error err)
 {
     if (err == EXTENSION)
-        ft_printf("Error\nWrong extension try with \".cub\"");
+        ft_printf("Error\nWrong extension try with\".cub\"\n");
+    else if (err == OPEN)
+        ft_printf("Error\nProblem with open function\n");
     exit(1);
 }

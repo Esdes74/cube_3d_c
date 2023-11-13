@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.h                                        :+:      :+:    :+:   */
+/*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,12 +13,20 @@
 #ifndef CUBE_H
 # define CUBE_H
 
+# include <fcntl.h>
 # include "libft/libft.h"
 
-typedef struct s_cube 
+typedef struct  s_color
 {
-    int     f[3];
-    int     c[3];
+    int first;
+    int second;
+    int third;
+}   t_color;
+
+typedef struct  s_cube 
+{
+    t_color f;
+    t_color c;
     char    *no;
     char    *so;
     char    *we;
@@ -29,6 +37,7 @@ typedef struct s_cube
 typedef enum e_error
 {
     EXTENSION,
+    OPEN,
 }   t_error;
 
 // Parsing

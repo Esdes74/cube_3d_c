@@ -12,22 +12,41 @@
 
 #include "cube.h"
 
-static void verif_arg(char *av);
+static void check_arg(char *av, t_cube *cube);
+static void check_file(int fd, t_cube *cube);
+static void check_map(int fd, t_cube *cube);
 
 void    parsing(char *av, t_cube *cube)
 {
     (void) cube;
-    verif_arg(av);
+    check_arg(av);
 }
 
-static void verif_arg(char *av)
+static void check_arg(char *av, t_cube *cube)
 {
     int i;
+    int fd;
 
     i = 0;
     while (av[i++])
         i++;
-    if (av[i - 1] != 'b' || av[i - 2] != 'u' || av[i - 3] != 'c' || \
+    if (i <= 3 || av[i - 1] != 'b' || av[i - 2] != 'u' || av[i - 3] != 'c' ||\
     av[i - 4] != '.')
         error(EXTENSION);
+    fd = open(av, O_RDONLY);
+    if (fd == -1)
+        error(OPEN);
+    check_file(fd, cube);
+    check_map(fd, cube);
+    close(fd);
+}
+
+static void check_file(int fd, t_cube *cube)
+{
+
+}
+
+static void check_map(int fd, t_cube *cube)
+{
+
 }
