@@ -12,11 +12,31 @@
 
 #include "cube.h"
 
-int main(int ac, char **av)
-{
-    t_cube  cube;
+static void	initialisation(t_cube *cube);
 
-    if (ac == 2)
-        parsing(av[1], &cube);
-    return (0);
+int	main(int ac, char **av)
+{
+	t_cube	cube;
+
+	if (ac == 2)
+	{
+		initialisation(&cube);
+		parsing(av[1], &cube);
+	}
+	return (0);
+}
+
+static void	initialisation(t_cube *cube)
+{
+	cube->f.first = 0;
+	cube->c.first = 0;
+	cube->f.second = 0;
+	cube->c.second = 0;
+	cube->f.third = 0;
+	cube->c.third = 0;
+	cube->no = NULL;
+	cube->so = NULL;
+	cube->we = NULL;
+	cube->ea = NULL;
+	cube->map = NULL;
 }

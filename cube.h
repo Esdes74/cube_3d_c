@@ -16,34 +16,34 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
-typedef struct  s_color
+typedef struct	s_color
 {
-    int first;
-    int second;
-    int third;
-}   t_color;
+	int first;
+	int second;
+	int third;
+}	t_color;
 
-typedef struct  s_cube 
+typedef struct	s_cube 
 {
-    t_color f;
-    t_color c;
-    char    *no;
-    char    *so;
-    char    *we;
-    char    *ea;
-    char    **map;
-}   t_cube;
+	t_color f;
+	t_color c;
+	char    *no;
+	char    *so;
+	char    *we;
+	char    *ea;
+	char    **map;
+}	t_cube;
 
-typedef enum e_error
+typedef enum	e_error
 {
-    EXTENSION,
-    OPEN,
-}   t_error;
+	EXTENSION,
+	OPEN,
+}	t_error;
 
 // Parsing
-void    parsing(char *av, t_cube *cube);
+void	parsing(char *av, t_cube *cube);
 
 // Error gestion
-void    error(t_error err);
+void	error(t_error err);
 
 #endif
