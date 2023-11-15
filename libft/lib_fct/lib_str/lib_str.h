@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_str.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbaule <dbaule@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 11:06:15 by eslamber          #+#    #+#             */
-/*   Updated: 2023/10/29 17:02:46 by dbaule           ###   ########.fr       */
+/*   Updated: 2023/11/15 17:10:09 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,7 @@ void		*ft_calloc_str(size_t nbr, size_t size);
 
 // Give the first line of file fd
 char		*get_next_line(int fd);
+
+// Free memory allocated to double array
+void		free_db_array(char **array);
 #endif

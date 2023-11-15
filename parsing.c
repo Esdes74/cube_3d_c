@@ -6,27 +6,28 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/15 15:25:22 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:25:21 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static int	check_arg(char *av);
+static int	check_arg(char *av, t_cube *cube);
 static void	check_file(int fd, t_cube *cube);
-/* static void	check_map(int fd, t_cube *cube); */
+static int	check_image(char *line, t_cube *cube);
+// static void	check_map(int fd, t_cube *cube);
 
 void	parsing(char *av, t_cube *cube)
 {
 	int	fd;
 
-	fd = check_arg(av);
+	fd = check_arg(av, cube);
 	check_file(fd, cube);
-	/* check_map(fd, cube); */
+	// check_map(fd, cube);
 	close(fd);
 }
 
-static int	check_arg(char *av)
+static int	check_arg(char *av, t_cube *cube)
 {
 	int	i;
 	int	fd;
@@ -36,17 +37,10 @@ static int	check_arg(char *av)
 		i++;
 	if (i <= 3 || av[i - 1] != 'b' || av[i - 2] != 'u' || av[i - 3] != 'c' ||\
 	av[i - 4] != '.')
-	{
-		ft_printf_fd(2, "i = %d\n", i);
-		free_all(cube);
-		error(EXTENSION);
-	}
+		return (free_all(cube), error(EXTENSION), -1);
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-	{
-		free_all(cube);
-		error(OPEN);
-	}
+		return (free_all(cube), error(OPEN), -1);
 	return (fd);
 }
 
@@ -59,17 +53,41 @@ static void	check_file(int fd, t_cube *cube)
 	line = get_next_line(fd);
 	while (count > 0)
 	{
-		if (line == '\0')
+		while (line && line[0] == '\n')
+		{
+			free(line);
+			line = get_next_line(fd);
+		}
+		if (!line || line[0] == '\0')
 		{
 			free_all(cube);
 			if (count == 6)
-				error(EMPTY_FILE);
-			error(UNCOMPLETE_FILE);
+				return (close(fd), free(line), error(EMPTY_FILE));
+			return (close(fd), free(line), error(UNCOMPLETE_FILE));
 		}
+		if (check_image(line, cube))
+			return (close(fd), free(line));
 	}
 }
 
-/* static void	check_map(int fd, t_cube *cube) */
-/* { */
+static int	check_image(char *line, t_cube *cube)
+{
+	char	**spt;
 
-/* } */
+	spt = ft_split(line, ' ');
+	if (spt == NULL)
+		return (free_all(cube), error(MALLOC), 1);
+	if (spt[0] == NULL || spt[1] == NULL || spt[2] != NULL)
+		return (free_all(cube), error(TEXTURE_FORMAT), 1);
+	if (ft_strncmp(spt[0], "no", 3) == 0)
+	{
+		cube->no.ptr_image = mlx_xpm_file_to_image(cube->mlx, spt[1], \
+		&cube->no.width, &cube->no.height);
+	}
+	return (0);
+}
+
+// static void	check_map(int fd, t_cube *cube)
+// {
+
+// }

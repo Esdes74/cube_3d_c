@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/15 12:57:48 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:19:54 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,13 @@ void	error(t_error err)
 		ft_printf("Error\nWrong initialisation of mlx\n");
 	else if (err == WIN)
 		ft_printf("Error\nWrong initialisation of window\n");
+	else if (err == EMPTY_FILE)
+		ft_printf("Error\nEmpty file\n");
+	else if (err == UNCOMPLETE_FILE)
+		ft_printf("Error\nUncomplete file\n");
+	else if (err == MALLOC)
+		ft_printf("Error\nProblem with malloc function\n");
+	else if (err == TEXTURE_FORMAT)
+		ft_printf("Error\nTexture not in a good format\n");
 	exit(1);
 }

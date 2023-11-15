@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/15 14:45:30 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:24:03 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ typedef struct	s_color
 
 typedef struct	s_image
 {
-	void	*ptr_image;
+	int		width;
+	int		height;
 	int		*bits;
 	int		*size;
 	int		*endian;
+	void	*ptr_image;
 }	t_image;
 
 typedef struct	s_cube 
@@ -56,6 +58,10 @@ typedef enum	e_error
 	OPEN,
 	MLX,
 	WIN,
+	EMPTY_FILE,
+	UNCOMPLETE_FILE,
+	MALLOC,
+	TEXTURE_FORMAT,
 }	t_error;
 
 // Parsing
@@ -63,5 +69,8 @@ void	parsing(char *av, t_cube *cube);
 
 // Error gestion
 void	error(t_error err);
+
+// Free functions
+void	free_all(t_cube *cube);
 
 #endif

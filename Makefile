@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/11/15 15:49:12 by eslamber         ###   ########.fr        #
+#    Updated: 2023/11/15 15:50:22 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ HEADER := cube.h
 # Definition of files variables
 SRC := main.c \
 	   parsing.c \
-	   error.c
+	   error.c \
+	   free_all.c
 OBJ := $(SRC:%.c=.obj/%.o)
 
 #
