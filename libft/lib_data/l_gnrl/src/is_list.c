@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   is_list.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eslamber <eslamber@student.42.ft>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 10:57:08 by eslamber          #+#    #+#             */
-/*   Updated: 2023/06/27 13:15:31 by eslamber         ###   ########.fr       */
+/*   Created: 2023/02/14 15:41:28 by eslamber          #+#    #+#             */
+/*   Updated: 2023/02/14 16:02:45 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib_math.h"
+#include "../../lib_data.h"
 
-void	ft_power(void)
+int	is_list(t_type t)
 {
-	return ;
+	return (t == LIST || t == STACK || t == QUEUE || t == DICO \
+			|| t == LIST_IND);
 }

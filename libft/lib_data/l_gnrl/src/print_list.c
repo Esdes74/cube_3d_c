@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:09:19 by eslamber          #+#    #+#             */
-/*   Updated: 2023/01/05 17:57:24 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:46:45 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	print_format(t_cell *tmp, t_type type)
 		ft_printf("%c", *((char *)tmp->data_cell->data));
 	else if (type == INT)
 		ft_printf("%d", *((int *)tmp->data_cell->data));
+	else if (type == STRING)
+		ft_printf("%s", ((char *)tmp->data_cell->data));
 }
 
 void	print_list(t_list *lst)
@@ -25,6 +27,8 @@ void	print_list(t_list *lst)
 	t_cell	*tmp;
 	t_type	type;
 
+	if (lst == 0)
+		return ;
 	tmp = lst->head;
 	ft_printf("{");
 	while (tmp != 0)
@@ -35,5 +39,5 @@ void	print_list(t_list *lst)
 			ft_printf(" ; ");
 		tmp = tmp->next;
 	}
-	ft_printf("}");
+	ft_printf("}\n");
 }

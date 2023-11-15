@@ -6,13 +6,15 @@
 /*   By: eslamber <eslamber@student.42.ft>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:46:25 by eslamber          #+#    #+#             */
-/*   Updated: 2023/01/04 16:07:20 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:56:07 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIB_QUEUE_H
 # define LIB_QUEUE_H
 # include <stdlib.h>
+# define DEBUG 1
+# define NODEB 0
 
 typedef enum e_type {
 	CHAR = 0,
@@ -30,7 +32,8 @@ typedef enum e_type {
 	QUEUE = 12,
 	DICO = 13,
 	TREE = 14,
-	ALEA = 15
+	ALEA = 15,
+	PID = 16,
 }	t_type;
 
 typedef enum e_bool{
@@ -52,6 +55,7 @@ typedef struct s_cell {
 
 typedef struct s_list {
 	size_t	len;
+	size_t	len_ind;
 	t_type	type_lst;
 	t_cell	*head;
 	t_cell	*tail;

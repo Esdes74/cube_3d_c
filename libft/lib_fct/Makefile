@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 12:35:34 by eslamber          #+#    #+#              #
-#    Updated: 2023/01/11 13:54:33 by eslamber         ###   ########.fr        #
+#    Updated: 2023/02/20 15:49:00 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ FLAGS := -Wall -Werror -Wextra -fsanitize=address -fno-omit-frame-pointer
 CC := gcc
 
 # Definition of variable librairie
-LIB := libft.a
+LIB := lib_fct.a
 
 # Definitions of librairies repositories
 LIB_MATH := lib_math/
@@ -69,6 +69,7 @@ PRINT_LIB := ft_putchar_fd.c \
 			 ft_putnbr_fd.c \
 			 ft_putstr_fd.c \
 			 ft_printf.c \
+			 ft_printf_fd.c \
 			 conv_ten_to_hex.c
 PRINT_LIB_H := $(LIB_PRINT)lib_print.h
 PRINT_OBJ_LIB := $(PRINT_LIB:%.c=$(LIB_PRINT_OBJ)%.o)
@@ -138,6 +139,17 @@ $(STR_OBJ_LIB): $(LIB_STR_OBJ)%.o: $(LIB_STR_SRC)%.c $(STR_LIB_H) lib_fct.h
 
 $(GNL_OBJ_LIB): $(LIB_GNL_OBJ)%.o: $(LIB_GNL_SRC)%.c $(GNL_LIB_H) lib_fct.h
 	$(CC) $(FLAGS) -c $< -o $@
+
+#
+### Debug rules
+#
+
+debug:
+	make -C ./ "FLAGS+= -Wall -Werror -Wextra -fsanitize=address \
+	-fno-omit-frame-pointer" print
+
+valgrind_deb:
+	make -C ./ "FLAGS+= -Wall -Werror -Wextra -g" print
 
 #
 ### Directories rules
@@ -211,8 +223,13 @@ fclean: clean cleanlib clean_git cleandir make_dir gitignor
 # Remake rules
 re: fclean all
 
+re_deb: fclean debug
+
+re_val: fclean valgrind_deb
+
 # Remakes rules with print options
 reprint: fclean print
 
 .PHONY: all make_dir print print_ob print_oe print_lb print_le clean cleandir
-.PHONY: clean_git gitignor flcean re reprint clean_lib
+.PHONY: clean_git gitignor flcean re reprint clean_lib debug valgrind_deb re_deb
+.PHONY: re_val

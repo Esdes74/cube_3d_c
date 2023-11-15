@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   value_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eslamber <eslamber@student.42.ft>          +#+  +:+       +#+        */
+/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 10:57:08 by eslamber          #+#    #+#             */
-/*   Updated: 2023/06/27 13:15:31 by eslamber         ###   ########.fr       */
+/*   Created: 2023/02/28 15:51:35 by eslamber          #+#    #+#             */
+/*   Updated: 2023/02/28 16:41:16 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib_math.h"
+#include "../../lib_data.h"
 
-void	ft_power(void)
+int	value_int(t_cell *cell)
 {
-	return ;
+	return (*((int *) cell->data_cell->data));
 }

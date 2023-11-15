@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eslamber <eslamber@student.42.ft>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 10:57:08 by eslamber          #+#    #+#             */
-/*   Updated: 2023/06/27 13:15:31 by eslamber         ###   ########.fr       */
+/*   Created: 2023/11/15 14:50:13 by eslamber          #+#    #+#             */
+/*   Updated: 2023/11/15 15:25:33 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib_math.h"
+#include "cube.h"
 
-void	ft_power(void)
+void	free_all(t_cube *cube)
 {
-	return ;
+	mlx_destroy_window(cube->mlx, cube->win);
+	mlx_destroy_display(cube->mlx);
+	free(cube->mlx);
 }

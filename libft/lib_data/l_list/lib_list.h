@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_list.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eslamber <eslamber@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 11:08:39 by eslamber          #+#    #+#             */
-/*   Updated: 2023/01/05 17:18:35 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/10/27 15:08:27 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIB_LIST_H
 # include <stdlib.h>
 # include <unistd.h>
+# define DEBUG 1
+# define NODEB 0
 
 typedef enum e_type {
 	CHAR = 0,
@@ -31,7 +33,8 @@ typedef enum e_type {
 	QUEUE = 12,
 	DICO = 13,
 	TREE = 14,
-	ALEA = 15
+	ALEA = 15,
+	PID = 16
 }	t_type;
 
 typedef enum e_bool{
@@ -53,6 +56,7 @@ typedef struct s_cell {
 
 typedef struct s_list {
 	size_t	len;
+	size_t	len_ind;
 	t_type	type_lst;
 	t_cell	*head;
 	t_cell	*tail;
@@ -68,7 +72,7 @@ t_data	*init_data(void *d, t_type t, t_bool allow, t_data *cell);
 int		stacking_list(t_list *lst, void *data, t_type t, int debug);
 
 // Add value in a list (add in last place)
-int		addback_list(t_list *lst, void *data, t_type t, int debug);
+int		tailing_list(t_list *lst, void *data, t_type t, int debug);
 
 // Remove cell from the front of list and return it
 t_cell	*unstack_list(t_list *lst, int debug);
@@ -77,8 +81,11 @@ t_cell	*unstack_list(t_list *lst, int debug);
 void	rmstack_list(t_list *lst, t_bool allow, int debug);
 
 // Remove cell from the back of list and return it
-t_cell	*rmback_list(t_list *lst, int debug);
+t_cell	*untail_list(t_list *lst, int debug);
 
 // Remove cell from the back of list and free it
-void	delback_list(t_list *lst, t_bool allow, int debug);
+void	rmtail_list(t_list *lst, t_bool allow, int debug);
+
+// Remove cell at the index i and free it
+void	rmindex_list(t_list *lst, t_bool allow, int index, int debug);
 #endif

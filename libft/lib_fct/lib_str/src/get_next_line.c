@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:43:03 by eslamber          #+#    #+#             */
-/*   Updated: 2023/01/11 20:33:23 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:49:47 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ static char	*ft_g_strjoin(char *dest, char *src)
 	if (dest == 0 && src == 0)
 		return (NULL);
 	if (dest == 0)
-		return (ft_g_strdup(src));
+		return (ft_strdup(src));
 	if (src == 0)
-		return (ft_g_strdup(dest));
-	len_tot = ft_g_strlen(dest) + ft_g_strlen(src) + 1;
+		return (ft_strdup(dest));
+	len_tot = ft_strlen(dest) + ft_strlen(src) + 1;
 	new = (char *) malloc(sizeof(char) * len_tot);
 	if (new == 0)
 		return (free(dest), dest = NULL, NULL);
 	new[0] = '\0';
-	ft_g_strlcat(new, dest, len_tot);
-	ft_g_strlcat(new, src, len_tot);
+	ft_strlcat(new, dest, len_tot);
+	ft_strlcat(new, src, len_tot);
 	free(dest);
 	dest = NULL;
 	return (new);
@@ -52,7 +52,7 @@ static char	*treat(char *line, char *buff)
 		buff[ind_buff++] = line[ind++];
 	ind = save_ind;
 	line[save_ind] = '\0';
-	new = ft_g_strdup(line);
+	new = ft_strdup(line);
 	if (!new)
 		return (free(line), line = NULL, NULL);
 	while (ind_buff < BUFFER_SIZE)

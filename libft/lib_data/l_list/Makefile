@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 11:18:56 by eslamber          #+#    #+#              #
-#    Updated: 2023/01/04 12:03:59 by eslamber         ###   ########.fr        #
+#    Updated: 2023/02/20 15:52:10 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,12 @@ H := lib_list.h
 L_SRC := init_list.c \
 		 init_data.c \
 		 stacking_list.c \
-		 addback_list.c \
+		 tailing_list.c \
 		 unstack_list.c \
 		 rmstack_list.c \
-		 rmback_list.c \
-		 delback_list.c
+		 untail_list.c \
+		 rmtail_list.c \
+		 rmindex_list.c
 L_OBJ := $(L_SRC:%.c=$(OBJ)%.o)
 
 # Definitions of differents printed colors
@@ -53,6 +54,17 @@ $(LIB): $(L_OBJ)
 
 $(L_OBJ): $(OBJ)%.o: $(SRC)%.c $(H)
 	$(CC) $(FLAGS) -c $< -o $@
+
+#
+### Debug rules
+#
+
+debug:
+	make -C ./ "FLAGS+= -Wall -Werror -Wextra -fsanitize=address \
+	-fno-omit-frame-pointer" print
+
+valgrind_deb:
+	make -C ./ "FLAGS+= -Wall -Werror -Wextra -g" print
 
 #
 ### Directories rules
@@ -131,9 +143,13 @@ fclean: clean cleanlib clean_git cleandir dir gitignor
 # Remake rules
 re: fclean all
 
+re_deb: fclean debug
+
+re_val: fclean valgrind_deb
+
 # Remakes rules with print options
 reprint: fclean print
 
 .PHONY: print_oe print_ob print_le print_lb reprint print
-.PHONY: re all dir gitignor
+.PHONY: re all dir gitignor debug valgrind_deb re_deb re_val
 .PHONY: fclean clean cleanlib cleandir clean_git

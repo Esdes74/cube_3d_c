@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 15:42:31 by eslamber          #+#    #+#              #
-#    Updated: 2023/02/07 12:08:40 by eslamber         ###   ########.fr        #
+#    Updated: 2023/10/25 16:48:42 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@
 #
 
 # Definitions of compilation options
-VALG := -g
-FLAGS := -Wall -Werror -Wextra -g#3 -fsanitize=address -fno-omit-frame-pointer
+FLAGS := -Wall -Werror -Wextra
 CC := gcc
 
 # Definition of variable librairie
@@ -99,22 +98,26 @@ ALL_LIB_SRC_DIR := $(LIB_LIST_SRC) \
 # Definition of variables needed to librairie's compilation
 GNRL_LIB := init_data.c \
 			size.c \
-			ft_putchar_fd.c \
-			ft_putstr_fd.c \
-			ft_putnbr_fd.c \
-			ft_printf.c \
-			conv_ten_to_hex.c \
-			print_list.c
+			print_list.c \
+			change_type.c \
+			clear_cell.c \
+			annihilation.c \
+			none.c \
+			is_list.c \
+			content.c \
+			value_int.c \
+			where.c
 GNRL_LIB_H := $(LIB_DATA)lib_data.h
 GNRL_OBJ_LIB := $(GNRL_LIB:%.c=$(LIB_GNRL_OBJ)%.o)
 
 LIST_LIB := init_list.c \
 			stacking_list.c \
-			addback_list.c \
+			tailing_list.c \
 			unstack_list.c \
 			rmstack_list.c \
-			rmback_list.c \
-			delback_list.c
+			untail_list.c \
+			rmtail_list.c \
+			rmindex_list.c
 LIST_LIB_H := $(LIB_LIST)lib_list.h
 LIST_OBJ_LIB := $(LIST_LIB:%.c=$(LIB_LIST_OBJ)%.o)
 
@@ -168,12 +171,14 @@ PRINT_LIB := ft_putchar_fd.c \
 			 ft_putendl_fd.c \
 			 ft_putnbr_fd.c \
 			 ft_putstr_fd.c \
+			 conv_ten_to_hex.c \
 			 ft_printf.c \
-			 conv_ten_to_hex.c
+			 ft_printf_fd.c
 PRINT_LIB_H := $(LIB_PRINT)lib_print.h
 PRINT_OBJ_LIB := $(PRINT_LIB:%.c=$(LIB_PRINT_OBJ)%.o)
 
 STR_LIB := ft_atoi.c \
+		   ft_calloc_str.c \
 		   ft_isalnum.c \
 		   ft_isascii.c \
 		   ft_isprint.c \
@@ -200,7 +205,7 @@ STR_LIB := ft_atoi.c \
 		   get_next_line_utils.c \
 		   get_next_line.c
 STR_LIB_H := $(LIB_STR)lib_str.h \
-			 $(LIB_STR)get_next_line.h
+			 $(LIB_STR)lib_str.h
 STR_OBJ_LIB := $(STR_LIB:%.c=$(LIB_STR_OBJ)%.o)
 
 ALL_OBJ_LIB := $(LIST_OBJ_LIB) \
@@ -220,14 +225,14 @@ LIGHTBLUE := '\e[0;32m'
 RED := '\e[0;31m'
 NEUTRAL := '\e[0m'
 #
-### Compilations rules
+### Compilations rulesrl_clear_history langage c
 #
 
 # only lib
 all: $(LIB)
 
-$(LIB): $(ALL_OBJ_LIB) libft.h
-	ar rc $@ $(ALL_OBJ_LIB)
+$(LIB): $(ALL_OBJ_LIB)
+	ar rc $@ $^
 	ranlib $@
 
 $(LIST_OBJ_LIB): $(LIB_LIST_OBJ)%.o: $(LIB_LIST_SRC)%.c $(LIST_LIB_H) \
@@ -279,10 +284,21 @@ $(GNL_OBJ_LIB): $(LIB_GNL_OBJ)%.o: $(LIB_GNL_SRC)%.c $(GNL_LIB_H) \
 	$(CC) $(FLAGS) -c $< -o $@
 
 #
+### Debug rules
+#
+
+debug:
+	make -C ./ "FLAGS+= -Wall -Werror -Wextra -fsanitize=address \
+	-fno-omit-frame-pointer -g3" print
+
+valgrind_deb:
+	make -C ./ "FLAGS+= -Wall -Werror -Wextra -g3" print
+
+#rl_clear_history langage c
 ### Directories rules
 #
 
-dir_lib:
+make_dir:
 	@echo -e $(LIGHTBLUE)make librairies directories$(NEUTRAL)
 	mkdir -p $(ALL_LIB_OBJ_DIR)
 	@echo -e $(LIGHTBLUE)done$(NEUTRAL)
@@ -300,27 +316,13 @@ vartest:
 #
 
 # Compilation of librairie with print options
-printlib: print_ob $(ALL_OBJ_LIB) print_lb $(LIB) print_le
+print: print_ob $(ALL_OBJ_LIB) print_lb $(LIB) print_le
 
 print_ob:
 	@echo -e $(LIGHTBLUE)compilation lib objects files$(NEUTRAL)
 
 print_oe:
 	@echo -e $(LIGHTBLUE)compilation lib objetcs files done$(NEUTRAL)
-	@echo
-
-print_otb:
-	@echo -e $(LIGHTBLUE)compilation test objects files$(NEUTRAL)
-
-print_ote:
-	@echo -e $(LIGHTBLUE)compilation test objetcs files done$(NEUTRAL)
-	@echo
-
-print_eb: print_ote
-	@echo -e $(LIGHTBLUE)compilation executables$(NEUTRAL)
-
-print_ee:
-	@echo -e $(LIGHTBLUE)compilation executables done$(NEUTRAL)
 	@echo
 
 print_lb: print_oe
@@ -336,8 +338,7 @@ print_le:
 
 # Classiques cleaning rules
 clean:
-	@echo -e $(LIGHTBLUE)remove all $(RED)objects files$(NEUTRAL)
-	#make -C mlx_linux clean
+	@echo -e $(LIGHTBLUE)remove all $(RED)librairires objects files$(NEUTRAL)
 	@rm -rfv $(ALL_OBJ_LIB)
 	@echo
 
@@ -348,14 +349,13 @@ cleanlib:
 
 # Directories cleaning rules
 cleandir: 
-	@echo -e $(LIGHTBLUE)remove all $(RED)directories$(NEUTRAL)
+	@echo -e $(LIGHTBLUE)remove all $(RED)librairies directories$(NEUTRAL)
 	@rm -rfv $(ALL_LIB_OBJ_DIR)
 	@echo
 
 clean_git:
 	@echo -e $(LIGHTBLUE)remove all $(RED)gitignore files$(NEUTRAL)
 	@rm -rfv ./lib_*/*/obj/.gitignore
-	@rm -rfv ../test_lib/*/.gitignore
 	@echo
 
 gitignor: 
@@ -376,17 +376,19 @@ gitignor:
 	@echo
 
 # Full cleaning rules
-fclean: clean cleanlib clean_git cleandir dir_lib gitignor
+fclean: clean cleanlib clean_git cleandir make_dir gitignor
 
 # Remake rules
-re: fcleanlib
-	make -C mlx_linux re
-	make all
+re: fclean all
+
+re_deb: fclean debug
+
+re_val: fclean valgrind_deb
 
 # Remakes rules with print options
-reprint: fcleanlib printlib
+reprint: fcleanlib print
 
-.PHONY: print_oe print_eb print_ee print_ob print_le print_lb reprint printlib
-.PHONY: print_otb print_ote
-.PHONY: re dir_lib vartest all gitignor
-.PHONY: fclean clean cleandir cleanlib clean_git mlx
+.PHONY: print_oe print_ob print_le print_lb reprint print
+.PHONY: re vartest all make_dir re_deb re_val gitignor
+.PHONY: debug valgrind_deb
+.PHONY: fclean clean cleandir cleanlib clean_git
