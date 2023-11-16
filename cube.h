@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 09:30:35 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:36:03 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@
 
 typedef struct s_color
 {
-	int	first;
-	int	second;
-	int	third;
+	int	red;
+	int	gre;
+	int	blu;
 }	t_color;
 
 typedef struct s_image
 {
 	int		width;
 	int		height;
-	int		*bits;
-	int		*size;
-	int		*endian;
+	int		bits;
+	int		size;
+	int		endian;
 	char	*img;
 	void	*ptr_image;
 }	t_image;
@@ -65,6 +65,7 @@ typedef enum e_error
 	TEXTURE_FORMAT,
 	XPM_FILE,
 	IMG_ADDR,
+	WRONG_IDENTIFIER,
 }	t_error;
 
 typedef enum e_mod

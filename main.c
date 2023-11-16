@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 09:32:31 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:36:36 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,19 @@ int	main(int ac, char **av)
 	initialisation(&cube);
 	/* mlx_loop(cube.mlx); */
 	parsing(av[1], &cube);
+	ft_printf_fd(2, "test cube->no %p", cube.no.img);
+	free_all(&cube);
 	return (0);
 }
 
 static void	init_cube(t_cube *cube)
 {
-	cube->f.first = 0;
-	cube->c.first = 0;
-	cube->f.second = 0;
-	cube->c.second = 0;
-	cube->f.third = 0;
-	cube->c.third = 0;
+	cube->c.red = 0;
+	cube->f.red = 0;
+	cube->f.gre = 0;
+	cube->c.gre = 0;
+	cube->f.blu = 0;
+	cube->c.blu = 0;
 	init_image(&cube->no);
 	init_image(&cube->so);
 	init_image(&cube->we);
@@ -50,9 +52,9 @@ static void	init_image(t_image *im)
 {
 	im->img = NULL;
 	im->ptr_image = NULL;
-	im->bits = NULL;
-	im->size = NULL;
-	im->endian = NULL;
+	im->bits = 0;
+	im->size = 0;
+	im->endian = 0;
 	im->width = 0;
 	im->height = 0;
 }
