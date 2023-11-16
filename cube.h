@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/15 19:24:03 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 09:30:35 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,37 +21,38 @@
 # define WIN_H 650//768
 # define NAME "CUBE 3D"
 
-typedef struct	s_color
+typedef struct s_color
 {
-	int first;
-	int second;
-	int third;
+	int	first;
+	int	second;
+	int	third;
 }	t_color;
 
-typedef struct	s_image
+typedef struct s_image
 {
 	int		width;
 	int		height;
 	int		*bits;
 	int		*size;
 	int		*endian;
+	char	*img;
 	void	*ptr_image;
 }	t_image;
 
-typedef struct	s_cube 
+typedef struct s_cube
 {
-	t_color f;
-	t_color c;
+	t_color	f;
+	t_color	c;
 	t_image	no;
 	t_image	so;
 	t_image	we;
 	t_image	ea;
 	void	*mlx;
 	void	*win;
-	char    **map;
+	char	**map;
 }	t_cube;
 
-typedef enum	e_error
+typedef enum e_error
 {
 	NBR_ARG,
 	EXTENSION,
@@ -62,13 +63,21 @@ typedef enum	e_error
 	UNCOMPLETE_FILE,
 	MALLOC,
 	TEXTURE_FORMAT,
+	XPM_FILE,
+	IMG_ADDR,
 }	t_error;
+
+typedef enum e_mod
+{
+	END,
+	CONTINUE,
+}	t_mod;
 
 // Parsing
 void	parsing(char *av, t_cube *cube);
 
 // Error gestion
-void	error(t_error err);
+void	error(t_error err, t_mod mod);
 
 // Free functions
 void	free_all(t_cube *cube);

@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/15 15:10:08 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 09:32:31 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	t_cube	cube;
 
 	if (ac != 2)
-		error(NBR_ARG);
+		error(NBR_ARG, END);
 	init_cube(&cube);
 	initialisation(&cube);
 	/* mlx_loop(cube.mlx); */
@@ -48,18 +48,22 @@ static void	init_cube(t_cube *cube)
 
 static void	init_image(t_image *im)
 {
+	im->img = NULL;
 	im->ptr_image = NULL;
 	im->bits = NULL;
 	im->size = NULL;
 	im->endian = NULL;
+	im->width = 0;
+	im->height = 0;
 }
 
 static void	initialisation(t_cube *cube)
 {
 	cube->mlx = mlx_init();
 	if (cube->mlx == NULL)
-		error(MLX);
+		error(MLX, END);
 	cube->win = mlx_new_window(cube->mlx, WIN_W, WIN_H, NAME);
 	if (cube->win == NULL)
-		return (mlx_destroy_display(cube->mlx), free(cube->mlx), error(WIN));
+		return (mlx_destroy_display(cube->mlx), free(cube->mlx), \
+	error(WIN, END));
 }

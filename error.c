@@ -6,13 +6,13 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/15 19:19:54 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 09:31:27 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	error(t_error err)
+void	error(t_error err, t_mod mod)
 {
 	if (err == NBR_ARG)
 		ft_printf("Error\nMust have 2 arguments\n");
@@ -32,5 +32,10 @@ void	error(t_error err)
 		ft_printf("Error\nProblem with malloc function\n");
 	else if (err == TEXTURE_FORMAT)
 		ft_printf("Error\nTexture not in a good format\n");
-	exit(1);
+	else if (err == XPM_FILE)
+		ft_printf("Error\nCan't open texture file\n");
+	else if (err == IMG_ADDR)
+		ft_printf("Error\nCan't find adress of image texture in memory\n");
+	if (mod == END)
+		exit(1);
 }
