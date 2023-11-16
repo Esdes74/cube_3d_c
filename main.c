@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 10:36:36 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:09:41 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,18 @@ int	main(int ac, char **av)
 	initialisation(&cube);
 	/* mlx_loop(cube.mlx); */
 	parsing(av[1], &cube);
-	ft_printf_fd(2, "test cube->no %p", cube.no.img);
 	free_all(&cube);
 	return (0);
 }
 
 static void	init_cube(t_cube *cube)
 {
-	cube->c.red = 0;
-	cube->f.red = 0;
-	cube->f.gre = 0;
-	cube->c.gre = 0;
-	cube->f.blu = 0;
-	cube->c.blu = 0;
+	cube->c.red = -1;
+	cube->f.red = -1;
+	cube->f.gre = -1;
+	cube->c.gre = -1;
+	cube->f.blu = -1;
+	cube->c.blu = -1;
 	init_image(&cube->no);
 	init_image(&cube->so);
 	init_image(&cube->we);

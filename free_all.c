@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:50:13 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 09:58:17 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:50:02 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,5 @@ void	free_all(t_cube *cube)
 static void	destroy_image(t_cube *cube, t_image *im)
 {
 	if (im->ptr_image != NULL)
-	{
-		// free(&im->width);
-		// free(&im->height);
 		mlx_destroy_image(cube->mlx, im->ptr_image);
-	}
 }

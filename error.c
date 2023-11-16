@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 10:25:11 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:14:57 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,6 @@ static void	error_bis(t_error err)
 		ft_printf_fd(2, "Error\nTexture not in good format\n");
 	else if (err == WRONG_IDENTIFIER)
 		ft_printf_fd(2, "Error\nWrong arguments in file\n");
+	else if (err == WRONG_RGB)
+		ft_printf_fd(2, "Error\nWrong RGB format\n");
 }
