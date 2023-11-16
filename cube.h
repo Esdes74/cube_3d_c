@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 14:53:50 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 18:43:20 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # define WIN_W 1200//1366
 # define WIN_H 650//768
 # define NAME "CUBE 3D"
+
+# define PERSO "NSEW"
+# define COMP " 10\n\0"
 
 typedef struct s_color
 {
@@ -41,6 +44,7 @@ typedef struct s_image
 
 typedef struct s_cube
 {
+	size_t	size_map;
 	t_color	f;
 	t_color	c;
 	t_image	no;
@@ -60,6 +64,7 @@ typedef enum e_error
 	MLX,
 	WIN,
 	EMPTY_FILE,
+	EMPTY_MAP,
 	UNCOMPLETE_FILE,
 	MALLOC,
 	TEXTURE_FORMAT,
@@ -67,6 +72,9 @@ typedef enum e_error
 	IMG_ADDR,
 	WRONG_IDENTIFIER,
 	W_RGB,
+	WRONG_COMPONENT,
+	DOUBLE_PERSO,
+	OPENED_MAP,
 }	t_error;
 
 typedef enum e_mod
@@ -78,12 +86,19 @@ typedef enum e_mod
 // Parsing
 void	parsing(char *av, t_cube *cube);
 
-void	check_file(int fd, int *count, t_cube *cube);
+void	check_file(int fd, t_cube *cube);
+
+void	check_map(int fd, t_cube *cube);
+
+void	verif_map(t_cube *cube);
 
 // Error gestion
 void	error(t_error err, t_mod mod);
 
 // Free functions
 void	free_all(t_cube *cube);
+
+// Utils function
+char	*pass_newline(int fd, char *line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:57:08 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 14:53:28 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 19:04:06 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,20 @@ static int	add_img(char **spt, t_cube *cube, t_image *im);
 static int	add_color(char **spt, t_cube *cube, t_color *col);
 static int	fill_rgb(int *count, t_cube *cube, t_color *col, char **rgb);
 
-void	check_file(int fd, int *count, t_cube *cube)
+void	check_file(int fd, t_cube *cube)
 {
+	int		count;
 	char	*line;
 
-	*count = 6;
+	count = 6;
 	line = get_next_line(fd);
-	while (*count > 0)
+	while (count > 0)
 	{
-		while (line && line[0] == '\n')
-		{
-			free(line);
-			line = get_next_line(fd);
-		}
+		line = pass_newline(fd, line);
 		if (!line || line[0] == '\0')
 		{
 			free_all(cube);
-			if (*count == 6)
+			if (count == 6)
 				return (close(fd), free(line), error(EMPTY_FILE, END));
 			return (close(fd), free(line), error(UNCOMPLETE_FILE, END));
 		}
@@ -41,7 +38,7 @@ void	check_file(int fd, int *count, t_cube *cube)
 			return (close(fd), free(line), exit(1));
 		free(line);
 		line = get_next_line(fd);
-		(*count)--;
+		(count)--;
 	}
 	free(line);
 }
@@ -111,7 +108,7 @@ static int	add_color(char **spt, t_cube *cube, t_color *col)
 			return (free_db_array(spt), free_all(cube), \
 			error(MALLOC, CONT), 1);
 		if (rgb[0] == NULL)
-			return (free_db_array(spt), free_all(cube), \
+			return (free_db_array(rgb), free_db_array(spt), free_all(cube), \
 			error(W_RGB, CONT), 1);
 		if (fill_rgb(&count, cube, col, rgb))
 			return (free_db_array(spt), free_db_array(rgb), 1);

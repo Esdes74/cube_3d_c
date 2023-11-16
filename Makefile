@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/11/16 11:58:52 by eslamber         ###   ########.fr        #
+#    Updated: 2023/11/16 19:24:52 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,10 @@ SRC := main.c \
 	   parsing.c \
 	   check_file.c \
 	   error.c \
-	   free_all.c
+	   free_all.c \
+	   check_map.c \
+	   verif_map.c \
+	   utils.c
 OBJ := $(SRC:%.c=.obj/%.o)
 
 #

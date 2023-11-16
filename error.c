@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 14:53:53 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 18:43:52 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,12 @@ static void	error_bis(t_error err)
 		ft_printf_fd(2, "Error\nWrong arguments in file\n");
 	else if (err == W_RGB)
 		ft_printf_fd(2, "Error\nWrong RGB format\n");
+	else if (err == EMPTY_MAP)
+		ft_printf_fd(2, "Error\nNo map in file\n");
+	else if (err == WRONG_COMPONENT)
+		ft_printf_fd(2, "Error\nWrong component in map\n");
+	else if (err == DOUBLE_PERSO)
+		ft_printf_fd(2, "Error\nThere is two players in map\n");
+	else if (err == OPENED_MAP)
+		ft_printf_fd(2, "Error\nMap not closed\n");
 }

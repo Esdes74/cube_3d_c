@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   none.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 11:41:02 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 17:03:58 by eslamber         ###   ########.fr       */
+/*   Created: 2023/11/16 15:00:59 by eslamber          #+#    #+#             */
+/*   Updated: 2023/11/16 15:16:03 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../lib_data.h"
+#include "cube.h"
 
-void	none(void *none)
+char	*pass_newline(int fd, char *line)
 {
-	(void) none;
-	return ;
+	while (line && line[0] == '\n')
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (line);
 }

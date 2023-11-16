@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 10:38:47 by eslamber          #+#    #+#             */
-/*   Updated: 2023/10/27 15:09:16 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:03:19 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void			init_tree(void);
 
 /*####################### GNRL ########################*/
 // Function do nothing
-void			none(void);
+void			none(void *none);
 
 // Return true if type given is a list type
 int				is_list(t_type t);

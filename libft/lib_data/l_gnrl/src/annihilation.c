@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:44:56 by eslamber          #+#    #+#             */
-/*   Updated: 2023/02/24 15:45:03 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 16:59:19 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	annihilation(t_list *lst, void (*f)(void *), int debug)
 	{
 		if (debug)
 			ft_printf("ERROR : fct annihilation : One or more arguments are \
-					null\n");
+null\n");
 		return ;
 	}
 	if (!is_list(lst->type_lst))
 	{
 		if (debug)
 			ft_printf("ERROR : fct annihilation : Utilisation of non type \
-					list\n");
+list\n");
 		return ;
 	}
 	tmp = lst->head;
