@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 12:14:29 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:53:50 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,19 @@ typedef enum e_error
 	XPM_FILE,
 	IMG_ADDR,
 	WRONG_IDENTIFIER,
-	WRONG_RGB,
+	W_RGB,
 }	t_error;
 
 typedef enum e_mod
 {
 	END,
-	CONTINUE,
+	CONT,
 }	t_mod;
 
 // Parsing
 void	parsing(char *av, t_cube *cube);
 
-void	check_file(int fd, t_cube *cube);
+void	check_file(int fd, int *count, t_cube *cube);
 
 // Error gestion
 void	error(t_error err, t_mod mod);

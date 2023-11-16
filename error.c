@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 12:14:57 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:53:53 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	error(t_error err, t_mod mod)
 static void	error_bis(t_error err)
 {
 	if (err == TEXTURE_FORMAT)
-		ft_printf_fd(2, "Error\nTexture not in good format\n");
+		ft_printf_fd(2, "Error\nTexture or color not in good format\n");
 	else if (err == WRONG_IDENTIFIER)
 		ft_printf_fd(2, "Error\nWrong arguments in file\n");
-	else if (err == WRONG_RGB)
+	else if (err == W_RGB)
 		ft_printf_fd(2, "Error\nWrong RGB format\n");
 }

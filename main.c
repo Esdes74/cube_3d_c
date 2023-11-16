@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 13:09:41 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:24:24 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int ac, char **av)
 	initialisation(&cube);
 	/* mlx_loop(cube.mlx); */
 	parsing(av[1], &cube);
+	ft_printf_fd(2, "coleurs = %d, %d, %d\n", cube.c.red, cube.c.gre, cube.c.blu);
+	ft_printf_fd(2, "coleurs = %d, %d, %d\n", cube.f.red, cube.f.gre, cube.f.blu);
 	free_all(&cube);
 	return (0);
 }
