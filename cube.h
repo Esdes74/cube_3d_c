@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 18:43:20 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:20:57 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_image
 
 typedef struct s_cube
 {
+	int		perso;
 	size_t	size_map;
 	t_color	f;
 	t_color	c;
@@ -75,6 +76,9 @@ typedef enum e_error
 	WRONG_COMPONENT,
 	DOUBLE_PERSO,
 	OPENED_MAP,
+	SAME_TEXTURE,
+	DB_TEXTURE_IDENTIFIER,
+	NO_PERSO,
 }	t_error;
 
 typedef enum e_mod

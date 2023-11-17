@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 17:45:10 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:20:16 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int ac, char **av)
 
 static void	init_cube(t_cube *cube)
 {
+	cube->perso = 0;
 	cube->size_map = 0;
 	cube->c.red = -1;
 	cube->f.red = -1;

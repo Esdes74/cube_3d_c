@@ -6,13 +6,13 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:18:48 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 17:53:04 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:20:46 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static int	check_line(char *line);
+static int	check_line(char *line, t_cube *cube);
 static int	creat_map(t_list *lst, t_cube *cube);
 
 void	check_map(int fd, t_cube *cube)
@@ -31,7 +31,7 @@ void	check_map(int fd, t_cube *cube)
 	error(EMPTY_MAP, END));
 	while (line)
 	{
-		if (check_line(line))
+		if (check_line(line, cube))
 			return (annihilation(lst, free, DEBUG), close(fd), free_all(cube), \
 		exit(1));
 		if (tailing_list(lst, line, STRING, DEBUG))
@@ -44,9 +44,8 @@ void	check_map(int fd, t_cube *cube)
 	annihilation(lst, none, DEBUG);
 }
 
-static int	check_line(char *line)
+static int	check_line(char *line, t_cube *cube)
 {
-	static int	perso;
 	int			i;
 
 	i = -1;
@@ -54,9 +53,9 @@ static int	check_line(char *line)
 	{
 		if (!ft_in(line[i], COMP))
 		{
-			if (ft_in(line[i], PERSO) && perso == 0)
-				perso = 1;
-			else if (ft_in(line[i], PERSO) && perso == 1)
+			if (ft_in(line[i], PERSO) && cube->perso == 0)
+				cube->perso = 1;
+			else if (ft_in(line[i], PERSO) && cube->perso == 1)
 				return (free(line), error(DOUBLE_PERSO, CONT), 1);
 			else
 				return (free(line), error(WRONG_COMPONENT, CONT), 1);
@@ -70,6 +69,8 @@ static int	creat_map(t_list *lst, t_cube *cube)
 	int		i;
 	t_cell	*tmp;
 
+	if (cube->perso == 0)
+		return (free_all(cube), error(NO_PERSO, CONT), 1);
 	cube->map = (char **) malloc(sizeof(char *) * (lst->len + 1));
 	if (cube->map == NULL)
 		return (free_all(cube), error(MALLOC, CONT), 1);

@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:57:08 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 19:04:06 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:13:47 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ static int	add_img(char **spt, t_cube *cube, t_image *im)
 {
 	size_t	i;
 
+	if (im->ptr_image != NULL)
+		return (free_db_array(spt), free_all(cube), \
+	error(DB_TEXTURE_IDENTIFIER, CONT), 1);
 	i = 0;
 	while (spt[1][i] && spt[1][i] != '\n')
 		i++;
@@ -130,8 +133,7 @@ static int	fill_rgb(int *count, t_cube *cube, t_color *col, char **rgb)
 		while (rgb[j][++len])
 			if (rgb[j][len] != '\0' && rgb[j][len] != '\n' \
 			&& (len > 3 || ft_isdigit(rgb[j][len]) == 0))
-				return (free_all(cube), \
-			free_db_array(rgb), error(W_RGB, CONT), 1);
+				return (free_all(cube), error(W_RGB, CONT), 1);
 		if (*count == 0)
 			col->red = ft_atoi(rgb[j]);
 		else if (*count == 1)
@@ -141,7 +143,7 @@ static int	fill_rgb(int *count, t_cube *cube, t_color *col, char **rgb)
 		if ((*count == 0 && (col->red < 0 || col->red > 255)) \
 		|| (*count == 1 && (col->gre < 0 || col->gre > 255)) \
 		|| (*count == 2 && (col->blu < 0 || col->blu > 255)))
-			return (free_all(cube), free_db_array(rgb), error(W_RGB, CONT), 1);
+			return (free_all(cube), error(W_RGB, CONT), 1);
 		(*count)++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/11/16 19:24:52 by eslamber         ###   ########.fr        #
+#    Updated: 2023/11/17 22:27:29 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,6 @@ OBJ := $(SRC:%.c=.obj/%.o)
 ### Compilation rules
 #
 
-
 all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $@ $(FLAG_MLX) -L. $(LIB)
@@ -62,6 +61,16 @@ $(LIB): FORCE
 
 $(MLX): FORCE
 	make -sC $(LIB_DIR)minilibx
+
+# Debug
+debug:
+	make -C libft debug
+	make -C ./ "FLAGS = -Wall -Wextra -fsanitize=address \
+	-fno-omit-frame-pointer -g3"
+
+val_deb:
+	make -C libft valgrind_deb
+	make -C ./ "FLAGS = -Wall -Werror -Wextra -g3"
 
 #
 ### Cleanup rules
@@ -77,5 +86,9 @@ fclean:
 	make -C libft fclean
 
 re: fclean all
+
+re_deb: fclean debug
+
+re_val: fclean val_deb
 
 .PHONY: all clean fclean re FORCE

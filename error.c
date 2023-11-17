@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 18:43:52 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:21:37 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,10 @@ static void	error_bis(t_error err)
 		ft_printf_fd(2, "Error\nThere is two players in map\n");
 	else if (err == OPENED_MAP)
 		ft_printf_fd(2, "Error\nMap not closed\n");
+	else if (err == SAME_TEXTURE)
+		ft_printf_fd(2, "Error\nOne or more textures are same\n");
+	else if (err == DB_TEXTURE_IDENTIFIER)
+		ft_printf_fd(2, "Error\nDouble definition of same texture\n");
+	else if (err == NO_PERSO)
+		ft_printf_fd(2, "Error\nThere is no perso in map\n");
 }

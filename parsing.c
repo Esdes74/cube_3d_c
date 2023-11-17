@@ -6,13 +6,15 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 17:57:26 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:34:01 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
 static int	check_arg(char *av, t_cube *cube);
+static void	check_texture(int fd, t_cube *cube);
+static void	texture_comp(int fd, t_image *fst, t_image *sec, t_cube *cube);
 
 void	parsing(char *av, t_cube *cube)
 {
@@ -20,6 +22,7 @@ void	parsing(char *av, t_cube *cube)
 
 	fd = check_arg(av, cube);
 	check_file(fd, cube);
+	check_texture(fd, cube);
 	check_map(fd, cube);
 	close(fd);
 	verif_map(cube);
@@ -40,4 +43,43 @@ static int	check_arg(char *av, t_cube *cube)
 	if (fd == -1)
 		return (free_all(cube), error(OPEN, END), -1);
 	return (fd);
+}
+
+static void	check_texture(int fd, t_cube *cube)
+{
+	texture_comp(fd, &cube->no, &cube->so, cube);
+	texture_comp(fd, &cube->no, &cube->we, cube);
+	texture_comp(fd, &cube->no, &cube->ea, cube);
+	texture_comp(fd, &cube->so, &cube->we, cube);
+	texture_comp(fd, &cube->so, &cube->ea, cube);
+	texture_comp(fd, &cube->we, &cube->ea, cube);
+}
+
+static void	texture_comp(int fd, t_image *fst, t_image *sec, t_cube *cube)
+{
+	int	x;
+	int	y;
+
+	if (fst->width != sec->width)
+		return ;
+	if (fst->height != sec->height)
+		return ;
+	if (fst->bits != sec->bits)
+		return ;
+	if (fst->size != sec->size)
+		return ;
+	x = -1;
+	while ((++x) < fst->height)
+	{
+		y = -1;
+		while ((++y) < fst->width)
+		{
+			if (ft_strncmp(&fst->img[(x * fst->size) + (y * fst->bits)], \
+			&sec->img[(x * fst->size) + (y * sec->bits)], fst->bits) != 0)
+				return ;
+		}
+	}
+	close(fd);
+	free_all(cube);
+	error(SAME_TEXTURE, END);
 }
