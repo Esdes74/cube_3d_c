@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:45:21 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/22 19:22:21 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:16:18 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ const t_point *p, char **dup)
 {
 	j = ((long long int) p->y) - 1;
 	if ((size_t) i == p->x && (size_t) j + 1 == p->y)
+	{
+		ft_printf_fd(2, "i = %d, j = %d, x = %d, y = %d\n", i, j, p->x, p->y);
 		j++;
+	}	
 	while (j < (long long int) ft_strlen(dup[i]) && dup[i][++j])
 	{
 		if (dup[i][j] == 'x')
