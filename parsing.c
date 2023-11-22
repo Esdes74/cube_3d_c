@@ -6,17 +6,18 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/17 22:34:01 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:01:24 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static int	check_arg(char *av, t_cube *cube);
-static void	check_texture(int fd, t_cube *cube);
-static void	texture_comp(int fd, t_image *fst, t_image *sec, t_cube *cube);
+static int	check_arg(const char *av, t_cube *cube);
+static void	check_texture(const int fd, t_cube *cube);
+static void	texture_comp(const int fd, const t_image *fst, \
+const t_image *sec, t_cube *cube);
 
-void	parsing(char *av, t_cube *cube)
+void	parsing(const char *av, t_cube *cube)
 {
 	int	fd;
 
@@ -28,7 +29,7 @@ void	parsing(char *av, t_cube *cube)
 	verif_map(cube);
 }
 
-static int	check_arg(char *av, t_cube *cube)
+static int	check_arg(const char *av, t_cube *cube)
 {
 	int	i;
 	int	fd;
@@ -45,7 +46,7 @@ static int	check_arg(char *av, t_cube *cube)
 	return (fd);
 }
 
-static void	check_texture(int fd, t_cube *cube)
+static void	check_texture(const int fd, t_cube *cube)
 {
 	texture_comp(fd, &cube->no, &cube->so, cube);
 	texture_comp(fd, &cube->no, &cube->we, cube);
@@ -55,7 +56,8 @@ static void	check_texture(int fd, t_cube *cube)
 	texture_comp(fd, &cube->we, &cube->ea, cube);
 }
 
-static void	texture_comp(int fd, t_image *fst, t_image *sec, t_cube *cube)
+static void	texture_comp(const int fd, const t_image *fst, const t_image *sec, \
+t_cube *cube)
 {
 	int	x;
 	int	y;

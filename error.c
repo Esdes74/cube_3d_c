@@ -6,15 +6,15 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/17 22:21:37 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:55:07 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	error_bis(t_error err);
+static void	error_bis(const t_error err);
 
-void	error(t_error err, t_mod mod)
+void	error(const t_error err, const t_mod mod)
 {
 	if (err == NBR_ARG)
 		ft_printf_fd(2, "Error\nMust have 2 arguments\n");
@@ -43,7 +43,7 @@ void	error(t_error err, t_mod mod)
 		exit(1);
 }
 
-static void	error_bis(t_error err)
+static void	error_bis(const t_error err)
 {
 	if (err == TEXTURE_FORMAT)
 		ft_printf_fd(2, "Error\nTexture or color not in good format\n");
@@ -65,4 +65,6 @@ static void	error_bis(t_error err)
 		ft_printf_fd(2, "Error\nDouble definition of same texture\n");
 	else if (err == NO_PERSO)
 		ft_printf_fd(2, "Error\nThere is no perso in map\n");
+	else if (err == UNVALID_SPACE)
+		ft_printf_fd(2, "Error\nThere is unvalid space in map\n");
 }

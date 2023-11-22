@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   diffusion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 15:00:59 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/22 19:36:55 by eslamber         ###   ########.fr       */
+/*   Created: 2023/11/22 17:34:42 by eslamber          #+#    #+#             */
+/*   Updated: 2023/11/22 19:23:28 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-char	*pass_newline(const int fd, char *line)
+void	diffusion(const size_t x, const size_t y, char **dup)
 {
-	while (line && line[0] == '\n')
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
-	return (line);
+	long long int	i;
+	long long int	j;
+	t_point			p;
+
+	p.x = x;
+	p.y = x;
+	i = (long long int) x - 1;
+	dup[x][y] = 'x';
+	ascending_diffusion(i, &j, &p, dup);
+	i = (long long int) x;
+	descending_diffusion(i, j, y, dup);
 }

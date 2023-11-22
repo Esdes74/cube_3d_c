@@ -6,18 +6,18 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:57:08 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/17 22:13:47 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:32:43 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static int	check_image(char *line, t_cube *cube);
+static int	check_image(const char *line, t_cube *cube);
 static int	add_img(char **spt, t_cube *cube, t_image *im);
 static int	add_color(char **spt, t_cube *cube, t_color *col);
 static int	fill_rgb(int *count, t_cube *cube, t_color *col, char **rgb);
 
-void	check_file(int fd, t_cube *cube)
+void	check_file(const int fd, t_cube *cube)
 {
 	int		count;
 	char	*line;
@@ -43,7 +43,7 @@ void	check_file(int fd, t_cube *cube)
 	free(line);
 }
 
-static int	check_image(char *line, t_cube *cube)
+static int	check_image(const char *line, t_cube *cube)
 {
 	char	**spt;
 

@@ -6,16 +6,16 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:18:48 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/17 22:20:46 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:34:12 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
 static int	check_line(char *line, t_cube *cube);
-static int	creat_map(t_list *lst, t_cube *cube);
+static int	creat_map(const t_list *lst, t_cube *cube);
 
-void	check_map(int fd, t_cube *cube)
+void	check_map(const int fd, t_cube *cube)
 {
 	t_list	*lst;
 	char	*line;
@@ -64,7 +64,7 @@ static int	check_line(char *line, t_cube *cube)
 	return (0);
 }
 
-static int	creat_map(t_list *lst, t_cube *cube)
+static int	creat_map(const t_list *lst, t_cube *cube)
 {
 	int		i;
 	t_cell	*tmp;

@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/17 22:20:57 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:24:18 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ typedef struct s_cube
 	char	**map;
 }	t_cube;
 
+typedef struct s_point
+{
+	size_t	x;
+	size_t	y;
+}	t_point;
+
 typedef enum e_error
 {
 	NBR_ARG,
@@ -79,6 +85,7 @@ typedef enum e_error
 	SAME_TEXTURE,
 	DB_TEXTURE_IDENTIFIER,
 	NO_PERSO,
+	UNVALID_SPACE,
 }	t_error;
 
 typedef enum e_mod
@@ -88,21 +95,31 @@ typedef enum e_mod
 }	t_mod;
 
 // Parsing
-void	parsing(char *av, t_cube *cube);
+void	parsing(const char *av, t_cube *cube);
 
-void	check_file(int fd, t_cube *cube);
+void	check_file(const int fd, t_cube *cube);
 
-void	check_map(int fd, t_cube *cube);
+void	check_map(const int fd, t_cube *cube);
 
 void	verif_map(t_cube *cube);
 
+void	diffusion(const size_t x, const size_t y, char **dup);
+
+void	ascending_diffusion(long long int i, long long int *j, \
+const t_point *p, char **dup);
+
+void	descending_diffusion(long long int i, long long int j, \
+const size_t y, char **dup);
+
+void	fill_dup(const long long int i, const long long int j, char **dup);
+
 // Error gestion
-void	error(t_error err, t_mod mod);
+void	error(const t_error err, const t_mod mod);
 
 // Free functions
 void	free_all(t_cube *cube);
 
 // Utils function
-char	*pass_newline(int fd, char *line);
+char	*pass_newline(const int fd, char *line);
 
 #endif

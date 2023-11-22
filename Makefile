@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/11/17 22:27:29 by eslamber         ###   ########.fr        #
+#    Updated: 2023/11/22 19:25:09 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,10 @@ SRC := main.c \
 	   free_all.c \
 	   check_map.c \
 	   verif_map.c \
+	   diffusion.c \
+	   ascending_diffusion.c \
+	   descending_diffusion.c \
+	   fill_dup.c \
 	   utils.c
 OBJ := $(SRC:%.c=.obj/%.o)
 
