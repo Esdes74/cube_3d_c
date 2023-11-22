@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:41:26 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/22 19:36:40 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:53:23 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int	check_diffusion(char **map, char **dup)
 	x = -1;
 	while (map[++x])
 	{
+		ft_printf_fd(2, dup[x]);
 		y = -1;
 		while (map[x][++y])
 		{
