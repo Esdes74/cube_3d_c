@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/23 12:33:48 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:18:12 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,27 @@ typedef struct s_image
 	void	*ptr_image;
 }	t_image;
 
+enum e_or
+{
+	NORD,
+	SUD,
+	EST,
+	OUEST,
+	NONE,
+};
+
+typedef struct s_perso
+{
+	size_t		x;
+	size_t		y;
+	enum e_or	orient;
+}	t_perso;
+
 typedef struct s_cube
 {
 	int		perso;
 	size_t	size_map;
+	t_perso	personnage;
 	t_color	f;
 	t_color	c;
 	t_image	no;
@@ -113,6 +130,9 @@ void	descending_diffusion(long long int i, long long int *j, \
 const size_t y, char **dup);
 
 void	fill_dup(const long long int i, const long long int j, char **dup);
+
+// Raytracing functions
+void	raytracing(t_cube *cube);
 
 // Error gestion
 void	error(const t_error err, const t_mod mod);

@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/17 22:20:16 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:16:58 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int ac, char **av)
 	init_cube(&cube);
 	initialisation(&cube);
 	parsing(av[1], &cube);
+	raytracing(&cube);
 	free_all(&cube);
 	return (0);
 }
@@ -33,6 +34,9 @@ static void	init_cube(t_cube *cube)
 {
 	cube->perso = 0;
 	cube->size_map = 0;
+	cube->personnage.x = 0;
+	cube->personnage.y = 0;
+	cube->personnage.orient = NONE;
 	cube->c.red = -1;
 	cube->f.red = -1;
 	cube->f.gre = -1;

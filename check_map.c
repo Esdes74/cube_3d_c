@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:18:48 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/22 19:34:12 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:15:04 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	check_map(const int fd, t_cube *cube)
 
 static int	check_line(char *line, t_cube *cube)
 {
-	int			i;
+	int	i;
 
 	i = -1;
 	while (line[++i])

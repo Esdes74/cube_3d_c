@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:45:21 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/23 12:22:43 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:34:20 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ascending_ordinate(long long int i, long long int *j, \
 const t_point *p, char **dup);
 static int	descending_ordinate(long long int i, \
-long long int *j, char **dup);
+long long int *j, const size_t x, char **dup);
 
 void	ascending_diffusion(long long int i, long long int *j, \
 const t_point *p, char **dup)
@@ -28,10 +28,10 @@ const t_point *p, char **dup)
 		if (flag != 1)
 			flag += ascending_ordinate(i, j, p, dup);
 		*j = (long long int) p->y;
-		while (*j >= (long long int) ft_strlen(dup[i]))
+		while (*j > (long long int) ft_strlen(dup[i]))
 			(*j)--;
 		if (flag != 2)
-			flag += descending_ordinate(i, j, dup);
+			flag += descending_ordinate(i, j, p->x, dup);
 	}
 }
 
@@ -48,10 +48,11 @@ const t_point *p, char **dup)
 	{
 		if (dup[i][*j] == '1')
 			flag = 1;
-		if (dup[i][*j] == 'x')
+		if (dup[i][*j] == 'I')
 			return (1 - flag);
 		fill_dup(i, *j, dup);
-		if (dup[i][*j] == 'X' && i > 0 && *j > 0 && dup[i - 1][*j - 1] == '1')
+		if (dup[i][*j] == 'X' && i > 0 && *j > 0 && dup[i - 1][*j - 1] == '1' \
+		&& i != (long long int) p->x && *j != (long long int) p->y)
 		{
 			if ((i > 0 && dup[i - 1][*j] == '0'))
 				diffusion(((size_t) i) - 1, (size_t)(*j), dup);
@@ -62,7 +63,8 @@ const t_point *p, char **dup)
 	return (0);
 }
 
-static int	descending_ordinate(long long int i, long long int *j, char **dup)
+static int	descending_ordinate(long long int i, long long int *j, \
+const size_t x, char **dup)
 {
 	int	flag;
 
@@ -71,12 +73,12 @@ static int	descending_ordinate(long long int i, long long int *j, char **dup)
 	{
 		if (dup[i][*j] == '1')
 			flag = 2;
-		if (dup[i][*j] == 'x')
+		if (dup[i][*j] == 'I')
 			return (2 - flag);
 		fill_dup(i, *j, dup);
 		if (dup[i][*j] == 'X' && i > 0 && \
 		*j + 1 < (long long int) ft_strlen(dup[i - 1]) && \
-		dup[i - 1][*j + 1] == '1')
+		dup[i - 1][*j + 1] == '1' && i != (long long int) x)
 		{
 			if ((i > 0 && dup[i - 1][*j] == '0'))
 				diffusion(((size_t) i) - 1, (size_t)(*j), dup);

@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   diffusion.c                                        :+:      :+:    :+:   */
+/*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 17:34:42 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/23 17:06:39 by eslamber         ###   ########.fr       */
+/*   Created: 2023/11/23 17:17:11 by eslamber          #+#    #+#             */
+/*   Updated: 2023/11/23 17:20:40 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	diffusion(const size_t x, const size_t y, char **dup)
+void	raytracing(t_cube *cube)
 {
-	long long int	i;
-	long long int	j;
-	t_point			p;
-
-	p.x = x;
-	p.y = y;
-	i = (long long int) x - 1;
-	dup[x][y] = 'I';
-	ascending_diffusion(i, &j, &p, dup);
-	i = (long long int) x;
-	descending_diffusion(i, &j, y, dup);
+	
 }
