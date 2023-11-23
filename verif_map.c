@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:41:26 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/22 20:10:30 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:36:16 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static int	check_diffusion(char **map, char **dup)
 	x = -1;
 	while (map[++x])
 	{
-		ft_printf_fd(2, dup[x]);
 		y = -1;
 		while (map[x][++y])
 		{
@@ -88,17 +87,21 @@ static int	check_conditions(size_t x, size_t y, char **map, char **dup)
 			return (free_db_array(dup), error(UNVALID_SPACE, CONT), 1);
 		return (free_db_array(dup), error(OPENED_MAP, CONT), 1);
 	}
-	else if ((map[x][y] == '\n' || map[x][y] == '\0') && \
-	((dup[x][y] != '\0' && dup[x][y + 1] == 'X') \
-	|| (y > 0 && dup[x][y - 1] == 'X') \
-	|| (dup[x + 1] != NULL && ft_strlen(dup[x + 1]) >= y \
-		&& dup[x + 1][y] == 'X') \
-	|| (x > 0 && ft_strlen(dup[x - 1]) >= y && dup[x - 1][y] == 'X')))
+	else if ((map[x][y] == '\n' || map[x][y] == '\0') && ((dup[x][y] != '\0' \
+	&& dup[x][y + 1] == 'X') || (y > 0 && dup[x][y - 1] == 'X') || (dup[x + 1] \
+	!= NULL && ft_strlen(dup[x + 1]) >= y && dup[x + 1][y] == 'X') || (x > 0 && \
+	ft_strlen(dup[x - 1]) >= y && dup[x - 1][y] == 'X')))
 		return (free_db_array(dup), error(OPENED_MAP, CONT), 1);
 	else if ((x == 0 && map[x][y] == '0') \
 	|| (y == 0 && map[x][y] == '0' && dup[x][y + 1] == 'X'))
 		return (free_db_array(dup), error(OPENED_MAP, CONT), 1);
 	else if (dup[x + 1] == NULL && map[x][y] == '0')
 		return (free_db_array(dup), error(OPENED_MAP, CONT), 1);
+	if (dup[x][y] == '0' && \
+	((dup[x + 1] != NULL && (dup[x + 1][y] == 'X' || dup[x + 1][y] == 'x')) || \
+	(x > 0 && (dup[x - 1][y] == 'X' || dup[x - 1][y] == 'x')) || \
+	(dup[x][y] != '\0' && (dup[x][y + 1] == 'X' || dup[x][y + 1] == 'x')) || \
+	(y > 0 && (dup[x][y - 1] == 'X' || dup[x][y - 1] == 'x'))))
+		return (free_db_array(dup), error(MISSED_DIFFUSION, CONT), 1);
 	return (0);
 }

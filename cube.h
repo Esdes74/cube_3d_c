@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/22 19:24:18 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:33:48 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef enum e_error
 	DB_TEXTURE_IDENTIFIER,
 	NO_PERSO,
 	UNVALID_SPACE,
+	MISSED_DIFFUSION,
 }	t_error;
 
 typedef enum e_mod
@@ -108,7 +109,7 @@ void	diffusion(const size_t x, const size_t y, char **dup);
 void	ascending_diffusion(long long int i, long long int *j, \
 const t_point *p, char **dup);
 
-void	descending_diffusion(long long int i, long long int j, \
+void	descending_diffusion(long long int i, long long int *j, \
 const size_t y, char **dup);
 
 void	fill_dup(const long long int i, const long long int j, char **dup);

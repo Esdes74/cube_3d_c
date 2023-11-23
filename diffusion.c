@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:34:42 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/22 20:10:19 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:04:25 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	diffusion(const size_t x, const size_t y, char **dup)
 	dup[x][y] = 'x';
 	ascending_diffusion(i, &j, &p, dup);
 	i = (long long int) x;
-	descending_diffusion(i, j, y, dup);
+	descending_diffusion(i, &j, y, dup);
 }

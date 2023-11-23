@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/22 18:55:07 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:34:37 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,6 @@ static void	error_bis(const t_error err)
 		ft_printf_fd(2, "Error\nThere is no perso in map\n");
 	else if (err == UNVALID_SPACE)
 		ft_printf_fd(2, "Error\nThere is unvalid space in map\n");
+	else if (err == MISSED_DIFFUSION)
+		ft_printf_fd(2, "Error\nDiffusion algorithm missed his play\n");
 }
