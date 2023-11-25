@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/11/22 19:25:09 by eslamber         ###   ########.fr        #
+#    Updated: 2023/11/24 15:55:15 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC := main.c \
 	   ascending_diffusion.c \
 	   descending_diffusion.c \
 	   fill_dup.c \
+	   raytracing.c \
 	   utils.c
 OBJ := $(SRC:%.c=.obj/%.o)
 

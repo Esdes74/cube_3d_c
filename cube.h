@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/23 17:18:12 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:25:42 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define CUBE_H
 
 # include <fcntl.h>
+# include <math.h>
 # include "libft/libft.h"
 # include "libft/minilibx/mlx.h"
 
-# define WIN_W 1200//1366
+# define WIN_W 1366
 # define WIN_H 650//768
 # define NAME "CUBE 3D"
 
