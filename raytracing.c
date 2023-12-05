@@ -6,178 +6,250 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 17:17:11 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/29 12:01:14 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:48:59 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+#include "display.h"
 #include <stdio.h>
 
-static double	collision_nord(double test, double x, double y, char **map);
+static double	calc_dist_max(void);
+static double	collision_nord(t_raytracing *ray, double x, double y, char **map);
+static void		affichage_mur(t_raytracing *ray, t_cube *cube);
+static int		encodage_couleur(t_color col);
+// static void		display_texture(int h, t_raytracing *ray, t_cube *cube);
+// static void		my_mlx_pixel_put(t_img_data *img_data, int x, int y, int color);
 
 void	raytracing(t_cube *cube)
 {
-	double	angle_principale;
+	t_raytracing	ray;
 
 	if (cube->personnage.orient == NORD)
-		angle_principale = M_PI / 2.0;
+		ray.begin_corner = M_PI / 2.0;
 	else if (cube->personnage.orient == SUD)
-		angle_principale = - (M_PI / 2.0);
+		ray.begin_corner = - (M_PI / 2.0);
 	else if (cube->personnage.orient == EST)
-		angle_principale = 0;
+		ray.begin_corner = 0;
 	else if (cube->personnage.orient == OUEST)
-		angle_principale = M_PI;
+		ray.begin_corner = M_PI;
 
-	double	fov;
-	double	angle_mini;
-	double	angle_maxi;
-	double	dif;
-	int		i;
-	double	test;
-	double	dist;
-	double	save;
+	ray.fov = M_PI / 8;
+	ray.mini_corner = ray.begin_corner - ray.fov;
+	ray.maxi_corner = ray.begin_corner + ray.fov;
 
-	fov = M_PI / 4;
-	angle_mini = angle_principale - fov;
-	angle_maxi = angle_principale + fov;
-
-	dif = angle_maxi - angle_mini;
-	dif = dif / WIN_W;
-	test = angle_mini;
-	i = 0;
-	save = 0;
-	// dist = collision_nord((5.0 * M_PI) / 8.0, cube->personnage.x + 0.5, cube->personnage.y + 0.5, cube->map);
-	mlx_string_put(cube->mlx, cube->win, cube->personnage.y * 100, cube->personnage.x * 100, 1000000222, "X");
-	while (test < angle_maxi)
+	ray.dif = ray.maxi_corner - ray.mini_corner;
+	ray.dif = (ray.dif / WIN_W) * 5;
+	ray.corner_col = ray.mini_corner;
+	ray.dist_max = calc_dist_max();
+	ray.i = 0;
+	while (ray.corner_col < ray.maxi_corner)
 	{
-		dist = collision_nord(test, cube->personnage.x + 0.5, cube->personnage.y + 0.5, cube->map);
-		if (dist > save + 1 || dist < save - 1)
-			printf("test = %lf, dist = %lf\n", test, dist);
-		save = dist;
-		mlx_pixel_put(cube->mlx, cube->win, (int) ((double) cube->personnage.y * 100.0) + (cos(test) * dist * 20), (int) ((double) cube->personnage.x * 100.0) - (sin(test) * dist * 20), 1000000222);
-		test += dif;
-		i++;
+		ray.dist = collision_nord(&ray, cube->personnage.x + 0.5, cube->personnage.y + 0.5, cube->map);
+		if (ray.dist == -1)
+			return ;
+		affichage_mur(&ray, cube);
+		free(ray.col);
+		ray.corner_col += ray.dif;
+		ray.i += 5;
 	}
-	ft_printf_fd(2, "\ni = %d\n", i);
 	mlx_loop(cube->mlx);
 }
 
-static double	collision_nord(double test, double x, double y, char **map)
+static double	collision_nord(t_raytracing *ray, double x, double y, char **map)
 {
-	double	unknown;
-	double	pos_x_dx = x;
-	double	pos_y_dx = y;
-	double	pos_x_dy = x;
-	double	pos_y_dy = y;
-	double	dist_tot_x = 0;
-	double	dist_tot_y = 0;
-	double	dif_x = 0.5;
-	double	dif_y = 0.5;
-	double	dist_x = 0;
-	double	dist_y = 0;
-	// double	dif_delta_x = 0;
-	// double	dif_delta_y = 0;
-	double	delta_x = 0;
-	double	delta_y = 0;
+	t_collision	*col;
 
-	unknown = (dif_x) / tan(test);
-	dist_x = sqrt(dif_x * dif_x + unknown * unknown);
-	// printf("unknown = %lf, dist_x = %lf\n", unknown, dist_x);
-	unknown = dif_y * tan(test);
-	dist_y = sqrt(dif_y * dif_y + unknown * unknown);
-	// printf("unknown = %lf, dist_y = %lf\n", unknown, dist_y);
-	unknown = 1 / tan(test);
-	delta_x = sqrt(unknown * unknown + 1);
-	// printf("unknown = %lf, delta_x = %lf\n", unknown, delta_x);
-	unknown = tan(test);
-	delta_y = sqrt(unknown * unknown + 1);
-	// printf("unknown = %lf, delta_y = %lf\n", unknown, delta_y);
+	col = (t_collision *) malloc(sizeof(t_collision));
+	if (col == NULL)
+		return (error(MALLOC, CONT), -1);
+	ray->col = col;
+	col->pos_x_dx = x;
+	col->pos_y_dx = y;
+	col->pos_x_dy = x;
+	col->pos_y_dy = y;
+	col->dist_tot_x = 0;
+	col->dist_tot_y = 0;
+	col->dif_x = 0.5;
+	col->dif_y = 0.5;
+
+	col->unknown = (col->dif_x) / tan(ray->corner_col);
+	col->dist_x = sqrt(col->dif_x * col->dif_x + col->unknown * col->unknown);
+	col->unknown = col->dif_y * tan(ray->corner_col);
+	col->dist_y = sqrt(col->dif_y * col->dif_y + col->unknown * col->unknown);
+	col->unknown = 1 / tan(ray->corner_col);
+	col->delta_x = sqrt(col->unknown * col->unknown + 1);
+	col->unknown = tan(ray->corner_col);
+	col->delta_y = sqrt(col->unknown * col->unknown + 1);
 	while (1)
 	{
-		if (dist_tot_x == 0 && ((dist_tot_y == 0 && \
-		dist_tot_x + dist_x <= dist_tot_y + dist_y) || \
-		(dist_tot_y != 0 && \
-		dist_tot_x + dist_x <= dist_tot_y + delta_y))) // Travail sur x
+		if (col->dist_tot_x == 0 && ((col->dist_tot_y == 0 && \
+		col->dist_tot_x + col->dist_x <= col->dist_tot_y + col->dist_y) || \
+		(col->dist_tot_y != 0 && \
+		col->dist_tot_x + col->dist_x <= col->dist_tot_y + col->delta_y))) // Travail sur x
 		{
-			// printf("A");
-			pos_x_dx = x - (sin(test) * dist_x);
-			pos_y_dx = y + (cos(test) * dist_x);
-			// printf("x = %lf, y = %lf, (cos(test) * dist_x) = %lf\n", pos_x_dx, pos_y_dx, (cos(test) * dist_x));
-			if (map[((int) pos_x_dx) - 1][(int) pos_y_dx] == '1')
-				return (dist_x);
-			dist_tot_x = dist_x;
+			col->pos_x_dx = x - (sin(ray->corner_col) * col->dist_x);
+			col->pos_y_dx = y + (cos(ray->corner_col) * col->dist_x);
+			col->final_x = col->pos_x_dx;
+			col->final_y = col->pos_y_dx;
+			if (map[((int) col->pos_x_dx) - 1][(int) col->pos_y_dx] == '1')
+				return (col->dist_x);
+			col->dist_tot_x = col->dist_x;
 		}
-		else if (dist_tot_y == 0 && ((dist_tot_x == 0 && \
-		dist_tot_x + dist_x > dist_tot_y + dist_y) || \
-		(dist_tot_x != 0 && \
-		dist_tot_x + delta_x > dist_tot_y + dist_y))) // Travail sur y
+		else if (col->dist_tot_y == 0 && ((col->dist_tot_x == 0 && \
+		col->dist_tot_x + col->dist_x > col->dist_tot_y + col->dist_y) || \
+		(col->dist_tot_x != 0 && \
+		col->dist_tot_x + col->delta_x > col->dist_tot_y + col->dist_y))) // Travail sur y
 		{
-			// printf("B");
-			pos_x_dy = x - (sin(test) * dist_y);
-			pos_y_dy = y + (cos(test) * dist_y);
-			// printf("x = %d, y = %d, test = %lf\n", (int) pos_x_dy, (int) pos_y_dy, test);
-			if (test < M_PI / 2)
+			col->pos_x_dy = x - (sin(ray->corner_col) * col->dist_y);
+			col->pos_y_dy = y + (cos(ray->corner_col) * col->dist_y);
+			col->final_x = col->pos_x_dy;
+			col->final_y = col->pos_y_dy;
+			if (ray->corner_col < M_PI / 2)
 			{
-				if (map[(int) pos_x_dy][((int) pos_y_dy)] == '1')
-					return (dist_y);
+				if (map[(int) col->pos_x_dy][((int) col->pos_y_dy)] == '1')
+					return (col->dist_y);
 			}
 			else
 			{
-				if ((int) pos_y_dy == 0)
+				if ((int) col->pos_y_dy == 0)
 				{
-					if (map[(int) pos_x_dy][(int) pos_y_dy] == '1')
-						return (dist_y);
+					if (map[(int) col->pos_x_dy][(int) col->pos_y_dy] == '1')
+						return (col->dist_y);
 				}
 				else
-					if (map[(int) pos_x_dy][(int) pos_y_dy - 1] == '1')
-						return (dist_y);
+					if (map[(int) col->pos_x_dy][(int) col->pos_y_dy - 1] == '1')
+						return (col->dist_y);
 			}
-			dist_tot_y = dist_y;
+			col->dist_tot_y = col->dist_y;
 		}
-		else if (dist_tot_x != 0 && ((dist_tot_y == 0 && \
-		dist_tot_x + delta_x <= dist_tot_y + dist_y) || \
-		(dist_tot_y != 0 && \
-		dist_tot_x + delta_x <= dist_tot_y + delta_y)))
+		else if (col->dist_tot_x != 0 && ((col->dist_tot_y == 0 && \
+		col->dist_tot_x + col->delta_x <= col->dist_tot_y + col->dist_y) || \
+		(col->dist_tot_y != 0 && \
+		col->dist_tot_x + col->delta_x <= col->dist_tot_y + col->delta_y)))
 		{
-			// printf("C");
-			pos_x_dx -= 1;
-			pos_y_dx += (cos(test) * delta_x);
-			if (test == M_PI / 2)
-				printf("yes\n");
-			// printf("x = %lf, y = %lf, (cos(test) * delta_x) = %lf", pos_x_dx, pos_y_dx, (cos(test) * delta_x));
-			if (map[(int) pos_x_dx - 1][(int) pos_y_dx] == '1')
-				return (dist_tot_x + delta_x);
-			dist_tot_x += delta_x;
+			col->pos_x_dx -= 1;
+			col->pos_y_dx += (cos(ray->corner_col) * col->delta_x);
+			col->final_x = col->pos_x_dx;
+			col->final_y = col->pos_y_dx;
+			if (map[(int) col->pos_x_dx - 1][(int) col->pos_y_dx] == '1')
+				return (col->dist_tot_x + col->delta_x);
+			col->dist_tot_x += col->delta_x;
 		}
-		else if (dist_tot_y != 0 && ((dist_tot_x == 0 && \
-		dist_tot_x + dist_x > dist_tot_y + delta_y) || \
-		(dist_tot_x != 0 && \
-		dist_tot_x + delta_x > dist_tot_y + delta_y)))
+		else if (col->dist_tot_y != 0 && ((col->dist_tot_x == 0 && \
+		col->dist_tot_x + col->dist_x > col->dist_tot_y + col->delta_y) || \
+		(col->dist_tot_x != 0 && \
+		col->dist_tot_x + col->delta_x > col->dist_tot_y + col->delta_y)))
 		{
-			// printf("D");
-			pos_x_dy -= sin(test) * delta_y;
-			if (test < M_PI / 2)
-				pos_y_dy += 1;
+			col->pos_x_dy -= sin(ray->corner_col) * col->delta_y;
+			if (ray->corner_col < M_PI / 2)
+				col->pos_y_dy += 1;
 			else
-				pos_y_dy -= 1;
-			// printf("x = %lf, y = %d\n", pos_x_dy, (int) pos_y_dy);
-			if (test < M_PI / 2)
+				col->pos_y_dy -= 1;
+			col->final_x = col->pos_x_dy;
+			col->final_y = col->pos_y_dy;
+			if (ray->corner_col < M_PI / 2)
 			{
-				if (map[(int) pos_x_dy][((int) pos_y_dy)] == '1')
-					return (dist_tot_y + delta_y);
+				if (map[(int) col->pos_x_dy][((int) col->pos_y_dy)] == '1')
+					return (col->dist_tot_y + col->delta_y);
 			}
 			else
 			{
-				if ((int) pos_y_dy == 0)
+				if ((int) col->pos_y_dy == 0)
 				{
-					if (map[(int) pos_x_dy][(int) pos_y_dy] == '1')
-						return (dist_tot_y += delta_y);
+					if (map[(int) col->pos_x_dy][(int) col->pos_y_dy] == '1')
+						return (col->dist_tot_y + col->delta_y);
 				}
 				else
-					if (map[(int) pos_x_dy][(int) pos_y_dy - 1] == '1')
-						return (dist_tot_y += delta_y);
+					if (map[(int) col->pos_x_dy][(int) col->pos_y_dy - 1] == '1')
+						return (col->dist_tot_y + col->delta_y);
 			}
-			dist_tot_y += delta_y;
+			col->dist_tot_y += col->delta_y;
 		}
 	}
 }
+
+static double	calc_dist_max(void)
+{
+	double	x1;
+	double	x2;
+
+	x1 = (((YARD * WIN_H) + WALL) + \
+	sqrt(pow(YARD * WIN_H, 2) + ((WALL * 2) * YARD * WIN_H) + pow(WALL, 2))) / \
+	(2 * WIN_H);
+	x2 = (((YARD * WIN_H) + WALL) - \
+	sqrt(pow(YARD * WIN_H, 2) + ((WALL * 2) * YARD * WIN_H) + pow(WALL, 2))) / \
+	(2 * WIN_H);
+	return (fmax(x1, x2));
+}
+
+static void	affichage_mur(t_raytracing *ray, t_cube *cube)
+{
+	int			h;
+	t_display	dis;
+
+	dis.c = encodage_couleur(cube->c);
+	dis.f = encodage_couleur(cube->f);
+	dis.wall = ((ray->dist_max - ray->dist) * WIN_H) / ray->dist_max;
+	h = 0;
+	while (h < WIN_H)
+	{
+		if (h < (WIN_H / 2) - (dis.wall / 2))
+		{
+			mlx_pixel_put(cube->mlx, cube->win, ray->i - 2, h, dis.c);
+			mlx_pixel_put(cube->mlx, cube->win, ray->i - 1, h, dis.c);
+			mlx_pixel_put(cube->mlx, cube->win, ray->i, h, dis.c);
+			mlx_pixel_put(cube->mlx, cube->win, ray->i + 1, h, dis.c);
+			mlx_pixel_put(cube->mlx, cube->win, ray->i + 2, h, dis.c);
+		}
+		else if (h > (WIN_H / 2) + (dis.wall / 2))
+		{
+			mlx_pixel_put(cube->mlx, cube->win, ray->i - 2, h, dis.f);
+			mlx_pixel_put(cube->mlx, cube->win, ray->i - 1, h, dis.f);
+			mlx_pixel_put(cube->mlx, cube->win, ray->i, h, dis.f);
+			mlx_pixel_put(cube->mlx, cube->win, ray->i + 1, h, dis.f);
+			mlx_pixel_put(cube->mlx, cube->win, ray->i + 2, h, dis.f);
+		}
+		// else
+		// 	display_texture(h, ray, cube);
+		h++;
+	}
+}
+
+static int	encodage_couleur(t_color col)
+{
+	int	res;
+
+	res = 0;
+	res = res | (col.red << 16);
+	res = res | (col.gre << 8);
+	res = res | col.blu;
+	return (res);
+}
+
+// static void	display_texture(int h, t_raytracing *ray, t_cube *cube)
+// {
+// 	double	entier;
+// 	double	frac;
+
+// 	while (ray->corner_col > M_PI)
+// 		ray->corner_col -= 2 * M_PI;
+// 	while (ray->corner_col <= - M_PI)
+// 		ray->corner_col += 2 * M_PI;
+
+// 	frac = modf(ray->col->final_y, &entier);
+// 	printf("nbr = %f, frac = %f, entier = %f\n", ray->col->final_y, frac, entier);
+// 	// if (ray->corner_col > - M_PI && ray->corner_col <= - (M_PI / 2))
+// 	// else if (ray->corner_col > - (M_PI / 2) && ray->corner_col <= 0)
+// 	// else if (ray->corner_col > 0 && ray->corner_col <= (M_PI / 2))
+// 	// else if (ray->corner_col > (M_PI / 2) && ray->corner_col <= M_PI)
+// }
+
+// static void	my_mlx_pixel_put(t_img_data *img_data, int x, int y, int color)
+// {
+// 	char	*dst;
+
+// 	dst = img_data->addr + (y * img_data->line_length + \
+x * (img_data->bits_per_pixel / 8));
+// 	*(unsigned int *)dst = color;
+// }

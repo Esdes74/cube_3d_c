@@ -6,11 +6,12 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/23 17:16:58 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:58:59 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+#include "display.h"
 
 static void	init_cube(t_cube *cube);
 static void	init_image(t_image *im);

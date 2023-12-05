@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/24 17:25:42 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:15:25 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@
 # include "libft/libft.h"
 # include "libft/minilibx/mlx.h"
 
-# define WIN_W 1366
-# define WIN_H 650//768
+# define WIN_W 1900
+# define WIN_H 1080//768
 # define NAME "CUBE 3D"
+
+# define WALL 15000 // taille d'un mur a une distance de 1 yard (en pixel)
+# define YARD 1 // valeur de 1 yard
 
 # define PERSO "NSEW"
 # define COMP " 10\n\0"
@@ -131,9 +134,6 @@ void	descending_diffusion(long long int i, long long int *j, \
 const size_t y, char **dup);
 
 void	fill_dup(const long long int i, const long long int j, char **dup);
-
-// Raytracing functions
-void	raytracing(t_cube *cube);
 
 // Error gestion
 void	error(const t_error err, const t_mod mod);

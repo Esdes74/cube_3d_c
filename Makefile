@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/11/24 15:55:15 by eslamber         ###   ########.fr        #
+#    Updated: 2023/12/05 16:47:00 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ MLX := $(LIB_DIR)minilibx/libmlx.a
 
 # Definition of project variables
 NAME := cube3D
-HEADER := cube.h
+HEADER := cube.h \
+		  display.h
 
 # Definition of files variables
 SRC := main.c \
