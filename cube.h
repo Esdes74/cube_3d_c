@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/05 19:15:25 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/06 10:55:52 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define WIN_H 1080//768
 # define NAME "CUBE 3D"
 
-# define WALL 15000 // taille d'un mur a une distance de 1 yard (en pixel)
-# define YARD 1 // valeur de 1 yard
+# define WALL 650 // taille d'un mur a une distance de 1 yard (en pixel)
+# define YARD 20 // valeur de 1 yard
 
 # define PERSO "NSEW"
 # define COMP " 10\n\0"
