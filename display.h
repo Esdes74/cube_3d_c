@@ -6,12 +6,16 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:43:44 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/06 19:16:07 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:07:07 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISPLAY_H
 # define DISPLAY_H
+
+# include <math.h>
+# include "struct_cube.h"
+# include "libft/libft.h"
 
 typedef struct s_vector
 {
@@ -92,5 +96,7 @@ typedef struct s_display
 void	raycasting(t_cube *cube);
 
 void	collision(t_raycasting *ray, t_cube *cube);
+
+void	rotate_vector(t_vector *vec, double deg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:21:35 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/06 20:06:44 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:57:54 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void	init_collision(int i, t_raycasting *ray)
 	ray->cam_mul = (2 * i / (double) WIN_W) - 1;
 	ray->ray_dir.x = ray->dir.x + ray->pla.x * ray->cam_mul;
 	ray->ray_dir.y = ray->dir.y + ray->pla.y * ray->cam_mul;
-	printf("ray_dir.x = %f, ", ray->ray_dir.x);
 	if (ray->ray_dir.x != 0)
 		ray->delta.x = fabs(1 / ray->ray_dir.x);
 	else
@@ -62,7 +61,6 @@ static void	init_collision(int i, t_raycasting *ray)
 		ray->delta.y = fabs(1 / ray->ray_dir.y);
 	else
 		ray->delta.y = 1e30;
-	printf("delta.x = %f, ", ray->delta.x);
 	ray->cur.x = (int) ray->pos.x;
 	ray->cur.y = (int) ray->pos.y;
 	init_sdist_step(ray);
@@ -101,7 +99,6 @@ static void	affichage_mur(t_raycasting *ray, t_cube *cube)
 
 	dis.c = encodage_couleur(cube->c);
 	dis.f = encodage_couleur(cube->f);
-	printf("perp = %f\n", ray->perp);
 	dis.wall = WIN_H / ray->perp;
 	start = -dis.wall / 2 + WIN_H / 2;
 	end = dis.wall / 2 + WIN_H / 2;

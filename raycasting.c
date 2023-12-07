@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 17:17:11 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/06 20:02:39 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:48:41 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,25 @@ void	raycasting(t_cube *cube)
 {
 	t_raycasting	ray;
 
+	fill_vector(&ray.dir, 0.0, 1.0);
+	fill_vector(&ray.pla, 0.6, 0.0);
 	if (cube->personnage.orient == NORD)
-		fill_vector(&ray.dir, -1.0, 0.0);
+	{
+		rotate_vector(&ray.dir, 90);
+		rotate_vector(&ray.pla, 90);
+	}
 	else if (cube->personnage.orient == SUD)
-		fill_vector(&ray.dir, 1.0, 0.0);
-	else if (cube->personnage.orient == EST)
-		fill_vector(&ray.dir, 0.0, -1.0);
+	{
+		rotate_vector(&ray.dir, -90);
+		rotate_vector(&ray.pla, -90);
+	}
 	else if (cube->personnage.orient == OUEST)
-		fill_vector(&ray.dir, 0.0, 1.0);
+	{
+		rotate_vector(&ray.dir, 180);
+		rotate_vector(&ray.pla, 180);
+	}
 	fill_vector(&ray.pos, ((double) cube->personnage.x) + 0.5, \
 	((double) cube->personnage.y) + 0.5);
-	fill_vector(&ray.pla, 0.0, 0.6);
 	collision(&ray, cube);
 }
 

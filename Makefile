@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/12/06 17:54:07 by eslamber         ###   ########.fr        #
+#    Updated: 2023/12/07 16:06:26 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ MLX := $(LIB_DIR)minilibx/libmlx.a
 # Definition of project variables
 NAME := cube3D
 HEADER := cube.h \
-		  display.h
+		  display.h \
+		  struct_cube.h
 
 # Definition of files variables
 SRC := main.c \
@@ -49,6 +50,7 @@ SRC := main.c \
 	   fill_dup.c \
 	   raycasting.c \
 	   collision.c \
+	   rotate_vector.c \
 	   utils.c
 OBJ := $(SRC:%.c=.obj/%.o)
 

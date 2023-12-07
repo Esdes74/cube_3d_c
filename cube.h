@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/06 10:55:52 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:05:48 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define CUBE_H
 
 # include <fcntl.h>
-# include <math.h>
 # include "libft/libft.h"
 # include "libft/minilibx/mlx.h"
+# include "struct_cube.h"
 
 # define WIN_W 1900
 # define WIN_H 1080//768
@@ -27,56 +27,6 @@
 
 # define PERSO "NSEW"
 # define COMP " 10\n\0"
-
-typedef struct s_color
-{
-	int	red;
-	int	gre;
-	int	blu;
-}	t_color;
-
-typedef struct s_image
-{
-	int		width;
-	int		height;
-	int		bits;
-	int		size;
-	int		endian;
-	char	*img;
-	void	*ptr_image;
-}	t_image;
-
-enum e_or
-{
-	NORD,
-	SUD,
-	EST,
-	OUEST,
-	NONE,
-};
-
-typedef struct s_perso
-{
-	size_t		x;
-	size_t		y;
-	enum e_or	orient;
-}	t_perso;
-
-typedef struct s_cube
-{
-	int		perso;
-	size_t	size_map;
-	t_perso	personnage;
-	t_color	f;
-	t_color	c;
-	t_image	no;
-	t_image	so;
-	t_image	we;
-	t_image	ea;
-	void	*mlx;
-	void	*win;
-	char	**map;
-}	t_cube;
 
 typedef struct s_point
 {
