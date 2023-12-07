@@ -6,13 +6,11 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 17:17:11 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/07 11:48:41 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:47:40 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
 #include "display.h"
-#include <stdio.h>
 
 static void	fill_vector(t_vector *v, double fst, double sec);
 
@@ -20,6 +18,8 @@ void	raycasting(t_cube *cube)
 {
 	t_raycasting	ray;
 
+	ray.c = encodage_couleur(cube->c);
+	ray.f = encodage_couleur(cube->f);
 	fill_vector(&ray.dir, 0.0, 1.0);
 	fill_vector(&ray.pla, 0.6, 0.0);
 	if (cube->personnage.orient == NORD)

@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:43:44 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/07 16:07:07 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/07 19:42:32 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ typedef struct s_int_vector
 
 typedef struct s_raycasting
 {
+	int				c;
+	int				f;
+	int				type;
 	int				wall;
 	size_t			i;
 	double			cam_mul;
@@ -47,9 +50,16 @@ typedef struct s_raycasting
 
 typedef struct s_display
 {
-	int	c;
-	int	f;
-	int	wall;
+	int		wall;
+	int		start;
+	int		end;
+	int		col;
+	int		lin;
+	int		color;
+	double	decimal;
+	double	entier;
+	t_image	*text;
+	t_color	pix;
 }	t_display;
 
 // typedef struct s_collision
@@ -98,5 +108,7 @@ void	raycasting(t_cube *cube);
 void	collision(t_raycasting *ray, t_cube *cube);
 
 void	rotate_vector(t_vector *vec, double deg);
+
+int		encodage_couleur(t_color col);
 
 #endif
