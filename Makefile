@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/12/07 16:06:26 by eslamber         ###   ########.fr        #
+#    Updated: 2023/12/11 12:04:10 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRC := main.c \
 	   fill_dup.c \
 	   raycasting.c \
 	   collision.c \
+	   display_texture.c \
 	   rotate_vector.c \
 	   utils.c
 OBJ := $(SRC:%.c=.obj/%.o)

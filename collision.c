@@ -6,19 +6,16 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:21:35 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/07 20:05:29 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/11 12:05:16 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 #include "display.h"
-#include <stdio.h>
 
 static void	init_collision(int i, t_raycasting *ray);
 static void	init_sdist_step(t_raycasting *ray);
 static void	affichage_mur(t_raycasting *ray, t_cube *cube);
-static void	display_texture(int *h, t_display *dis, t_raycasting *ray, \
-t_cube *cube);
 
 void	collision(t_raycasting *ray, t_cube *cube)
 {
@@ -115,51 +112,4 @@ static void	affichage_mur(t_raycasting *ray, t_cube *cube)
 			display_texture(&h, &dis, ray, cube);
 		h++;
 	}
-}
-
-static void	display_texture(int *h, t_display *dis, t_raycasting *ray, \
-t_cube *cube)
-{
-	double	hit;
-	int		H;
-
-	if (ray->type == 0)
-		hit = ray->pos.y + ray->perp * ray->ray_dir.y;
-	else
-		hit = ray->pos.x + ray->perp * ray->ray_dir.x;
-	if (ray->type == 0 && ray->ray_dir.y > 0)
-		dis->text = &cube->ea;
-	else if (ray->type == 0 && ray->ray_dir.y < 0)
-		dis->text = &cube->we;
-	else if (ray->type == 1 && ray->ray_dir.x > 0)
-		dis->text = &cube->so;
-	else
-		dis->text = &cube->no;
-	dis->decimal = modf(hit, &dis->entier);
-	dis->col = dis->text->width * dis->decimal;
-	dis->lin = (dis->end - dis->start) / dis->text->height;
-	H = 0;
-	while (*h <= dis->end && *h <= WIN_H)
-	{
-		if (*h % dis->lin == 0)
-		{
-			H++;
-			// printf("H = %d, size = %d, res = %d\n", H, dis->text->size, *h / dis->lin);
-			dis->pix.blu = dis->text->img[H * dis->text->size + \
-			dis->col * (dis->text->bits / 8)];
-			dis->pix.gre = dis->text->img[H * dis->text->size + \
-			dis->col * (dis->text->bits / 8) + 1];
-			dis->pix.red = dis->text->img[H * dis->text->size + \
-			dis->col * (dis->text->bits / 8) + 2];
-			// printf("col = %d, blu = %d, gre = %d, red = %d\n", dis->col, dis->pix.blu, dis->pix.gre, dis->pix.red);
-			printf("blu = %d, gre = %d, red = %d\n", dis->text->img[H * dis->text->size + \
-			dis->col * (dis->text->bits / 8)], dis->text->img[H * dis->text->size + \
-			dis->col * (dis->text->bits / 8)] + 1, dis->text->img[H * dis->text->size + \
-			dis->col * (dis->text->bits / 8)] + 2);
-			dis->color = encodage_couleur(dis->pix);
-		}
-		mlx_pixel_put(cube->mlx, cube->win, ray->i, *h, dis->color);
-		*h += 1;
-	}
-	*h -= 1;
 }

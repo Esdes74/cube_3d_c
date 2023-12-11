@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:43:44 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/07 19:42:32 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:20:41 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ typedef struct s_display
 	int		color;
 	double	decimal;
 	double	entier;
-	t_image	*text;
+	int		**text_array;
 	t_color	pix;
+	t_image	*text;
 }	t_display;
 
 // typedef struct s_collision
@@ -108,6 +109,9 @@ void	raycasting(t_cube *cube);
 void	collision(t_raycasting *ray, t_cube *cube);
 
 void	rotate_vector(t_vector *vec, double deg);
+
+void	display_texture(int *h, t_display *dis, t_raycasting *ray, \
+t_cube *cube);
 
 int		encodage_couleur(t_color col);
 
