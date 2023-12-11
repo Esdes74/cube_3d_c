@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/22 19:01:24 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:04:09 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	parsing(const char *av, t_cube *cube)
 
 	fd = check_arg(av, cube);
 	check_file(fd, cube);
+	encodage_texture(fd, cube);
 	check_texture(fd, cube);
 	check_map(fd, cube);
 	close(fd);

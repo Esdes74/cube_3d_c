@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:43:44 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/11 15:20:41 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:35:10 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,46 +63,6 @@ typedef struct s_display
 	t_image	*text;
 }	t_display;
 
-// typedef struct s_collision
-// {
-// 	double	unknown;
-// 	double	pos_x_dx;
-// 	double	pos_y_dx;
-// 	double	pos_x_dy;
-// 	double	pos_y_dy;
-// 	double	dist_tot_x;
-// 	double	dist_tot_y;
-// 	double	dif_x;
-// 	double	dif_y;
-// 	double	dist_x;
-// 	double	dist_y;
-// 	double	delta_x;
-// 	double	delta_y;
-// 	double	final_x;
-// 	double	final_y;
-// }	t_collision;
-
-// typedef struct s_raytracing
-// {
-// 	int			i;
-// 	double		begin_corner;
-// 	double		mini_corner;
-// 	double		maxi_corner;
-// 	double		fov;
-// 	double		dif;
-// 	double		corner_col;
-// 	double		dist;
-// 	double		dist_max;
-// 	t_collision	*col;
-// }	t_raytracing;
-
-// typedef struct s_display
-// {
-// 	int		c;
-// 	int		f;
-// 	double	wall;
-// }	t_display;
-
 // Raytracing functions
 void	raycasting(t_cube *cube);
 
@@ -112,7 +72,5 @@ void	rotate_vector(t_vector *vec, double deg);
 
 void	display_texture(int *h, t_display *dis, t_raycasting *ray, \
 t_cube *cube);
-
-int		encodage_couleur(t_color col);
 
 #endif

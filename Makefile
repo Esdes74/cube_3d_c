@@ -6,7 +6,7 @@
 #    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/12/11 12:04:10 by eslamber         ###   ########.fr        #
+#    Updated: 2023/12/11 18:29:54 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ HEADER := cube.h \
 SRC := main.c \
 	   parsing.c \
 	   check_file.c \
+	   encodage_texture.c \
 	   error.c \
 	   free_all.c \
 	   check_map.c \

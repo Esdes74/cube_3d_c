@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:04:45 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/07 19:46:19 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:13:03 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_image
 	int		endian;
 	char	*img;
 	void	*ptr_image;
+	int		**pix_img;
 }	t_image;
 
 enum e_or

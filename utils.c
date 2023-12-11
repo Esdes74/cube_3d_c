@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:00:59 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/11 15:38:43 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:16:52 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,3 @@ char	*pass_newline(const int fd, char *line)
 	return (line);
 }
 
-int	encodage_couleur(t_color col)
-{
-	int	res;
-
-	res = 0;
-	res = res | (col.red << 16);
-	res = res | (col.gre << 8);
-	res = res | col.blu;
-	return (res);
-}

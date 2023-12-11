@@ -6,7 +6,7 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/06 14:25:45 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:26:12 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	init_image(t_image *im)
 {
 	im->img = NULL;
 	im->ptr_image = NULL;
+	im->pix_img = NULL;
 	im->bits = 0;
 	im->size = 0;
 	im->endian = 0;
