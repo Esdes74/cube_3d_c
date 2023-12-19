@@ -85,6 +85,8 @@ const size_t y, char **dup);
 
 void	fill_dup(const long long int i, const long long int j, char **dup);
 
+void	encodage_texture(int fd, t_cube *cube);
+
 // Error gestion
 void	error(const t_error err, const t_mod mod);
 
