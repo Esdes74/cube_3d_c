@@ -6,7 +6,7 @@
 #    By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/12/19 15:29:19 by estelamb         ###   ########.fr        #
+#    Updated: 2023/12/20 17:19:51 by estelamb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC := main.c \
 	   raycasting.c \
 	   collision.c \
 	   display_texture.c \
+	   put_pix.c \
 	   rotate_vector.c \
 	   utils.c
 OBJ := $(SRC:%.c=.obj/%.o)

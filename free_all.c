@@ -6,7 +6,7 @@
 /*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:50:13 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/20 15:04:32 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/20 16:12:15 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	free_all(t_cube *cube)
 	destroy_image(cube, &cube->so);
 	destroy_image(cube, &cube->ea);
 	destroy_image(cube, &cube->we);
+	destroy_image(cube, &cube->screen);
 	mlx_destroy_window(cube->mlx, cube->win);
 	mlx_destroy_display(cube->mlx);
 	free(cube->mlx);

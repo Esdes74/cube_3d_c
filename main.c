@@ -6,7 +6,7 @@
 /*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/20 15:16:18 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:30:12 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 	initialisation(&cube);
 	parsing(av[1], &cube);
 	raycasting(&cube);
+	mlx_loop(cube.mlx);
 	free_all(&cube);
 	return (0);
 }
@@ -48,7 +49,7 @@ static void	init_cube(t_cube *cube)
 	init_image(&cube->so);
 	init_image(&cube->we);
 	init_image(&cube->ea);
-	cube->screen = NULL;
+	init_image(&cube->screen);
 	cube->mlx = NULL;
 	cube->win = NULL;
 	cube->map = NULL;
@@ -71,12 +72,18 @@ static void	initialisation(t_cube *cube)
 	cube->mlx = mlx_init();
 	if (cube->mlx == NULL)
 		error(MLX, END);
-	cube->screen = mlx_new_image(cue->mlx, WIN_W, WIN_H);
-	if (cube->screen == NULL)
+	cube->screen.ptr_image = mlx_new_image(cube->mlx, WIN_W, WIN_H);
+	if (cube->screen.ptr_image == NULL)
 		return (mlx_destroy_display(cube->mlx), free(cube->mlx), \
 	error(SCREEN, END));
+	cube->screen.img = mlx_get_data_addr(cube->screen.ptr_image, \
+	&cube->screen.bits, &cube->screen.size, &cube->screen.endian);
+	if (cube->screen.img == NULL)
+		return (mlx_destroy_image(cube->mlx, &cube->screen), \
+	mlx_destroy_display(cube->mlx), free(cube->mlx), \
+	error(IMG_ADDR, END));
 	cube->win = mlx_new_window(cube->mlx, WIN_W, WIN_H, NAME);
 	if (cube->win == NULL)
-		return (mlx_destroy_image(cube->mlx, cube->screen), \
+		return (mlx_destroy_image(cube->mlx, &cube->screen), \
 	mlx_destroy_display(cube->mlx), free(cube->mlx), error(WIN, END));
 }

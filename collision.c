@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:21:35 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/11 12:05:16 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:30:24 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	collision(t_raycasting *ray, t_cube *cube)
 		}
 		affichage_mur(ray, cube);
 	}
-	mlx_loop(cube->mlx);
+	mlx_put_image_to_window(cube->mlx, cube->win, cube->screen.ptr_image, 0, 0);
 }
 
 static void	init_collision(int i, t_raycasting *ray)
@@ -105,9 +105,9 @@ static void	affichage_mur(t_raycasting *ray, t_cube *cube)
 	while (h < WIN_H)
 	{
 		if (dis.start > 0 && h < dis.start)
-			mlx_pixel_put(cube->mlx, cube->win, ray->i, h, ray->c);
+			put_pix(&cube->screen, ray->c, ray->i, h);
 		else if (dis.end < WIN_H && h > dis.end)
-			mlx_pixel_put(cube->mlx, cube->win, ray->i, h, ray->f);
+			put_pix(&cube->screen, ray->f, ray->i, h);
 		else
 			display_texture(&h, &dis, ray, cube);
 		h++;

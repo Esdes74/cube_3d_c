@@ -6,7 +6,7 @@
 /*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:02:49 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/20 15:45:14 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:20:24 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	display_texture(int *h, t_display *dis, t_raycasting *ray, t_cube *cube)
 		if ((int) dis->text_pos < dis->text->height)
 			tex_y = (int) dis->text_pos;
 		dis->text_pos += dis->step;
-		mlx_pixel_put(cube->mlx, cube->win, ray->i, *h, \
-		dis->text->pix_img[tex_y][dis->text_x]);
+		put_pix(&cube->screen, dis->text->pix_img[tex_y][dis->text_x], \
+		ray->i, *h);
 		*h += 1;
 	}
 	*h -= 1;

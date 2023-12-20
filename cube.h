@@ -6,7 +6,7 @@
 /*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/20 15:42:29 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:18:37 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,7 @@ void	free_all(t_cube *cube);
 
 // Utils function
 char	*pass_newline(const int fd, char *line);
+
+void	put_pix(t_image *im, int color, int x, int y);
 
 #endif
