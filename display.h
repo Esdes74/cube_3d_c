@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:43:44 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/11 18:35:10 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:13:32 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,10 @@ typedef struct s_display
 	int		wall;
 	int		start;
 	int		end;
-	int		col;
 	int		lin;
-	int		color;
-	double	decimal;
-	double	entier;
-	int		**text_array;
-	t_color	pix;
+	int		text_x;
+	double	step;
+	double	text_pos;
 	t_image	*text;
 }	t_display;
 

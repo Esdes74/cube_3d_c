@@ -6,7 +6,7 @@
 /*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:02:49 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/19 17:09:42 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:10:10 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,17 @@ t_cube *cube);
 
 void	display_texture(int *h, t_display *dis, t_raycasting *ray, t_cube *cube)
 {
-	int	high;
-	int	dep;
+	int	texY;
 
 	init_texture(dis, ray, cube);
-	high = 0;
-	dep = 0; //((dis->end - dis->start) / 2) - (dis->lin * (dis->text->height / 2));
-	printf("dif = %d, lin = %d\n", ((dis->end - dis->start) / 2) - (dis->lin * (dis->text->height / 2)), dis->lin);
 	while (*h <= dis->end && *h <= WIN_H)
 	{
-		if (dep == dis->lin && high + 1 < dis->text->height)
-		{
-			high++;
-			dep = -1;
-		}
-		dep++;
+		if ((int) dis->text_pos < dis->text->height)
+			texY = (int) dis->text_pos;
+		dis->text_pos += dis->step;
+		printf("texY = %d i = %ld\n", texY, ray->i);
 		mlx_pixel_put(cube->mlx, cube->win, ray->i, *h, \
-		dis->text->pix_img[high][dis->col]);
+		dis->text->pix_img[texY][dis->text_x]);
 		*h += 1;
 	}
 	*h -= 1;
@@ -59,7 +53,12 @@ t_cube *cube)
 		dis->text = &cube->ea;
 	else
 		dis->text = &cube->we;
-	dis->decimal = modf(hit, &dis->entier);
-	dis->col = dis->text->width * dis->decimal;
-	dis->lin = (dis->end - dis->start) / dis->text->height;
+	hit -= floor(hit);
+	dis->text_x = (int) (hit * ((double) dis->text->width));
+	if ((ray->type == 0 && ray->ray_dir.x > 0) || \
+	(ray->type == 1 && ray->ray_dir.y < 0))
+		dis->text_x = dis->text->width - dis->text_x - 1;
+	dis->lin = (int) (WIN_H / ray->perp);
+	dis->step = 1.0 * dis->text->height / dis->lin;
+	dis->text_pos = (dis->start - WIN_H / 2 + dis->lin / 2) * dis->step;
 }
