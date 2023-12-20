@@ -6,7 +6,7 @@
 /*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:02:49 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/20 14:10:10 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:22:26 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ void	display_texture(int *h, t_display *dis, t_raycasting *ray, t_cube *cube)
 	init_texture(dis, ray, cube);
 	while (*h <= dis->end && *h <= WIN_H)
 	{
+		while (dis->start < 0)
+		{
+			texY = (int) dis->text_pos;
+			dis->text_pos += dis->step;
+			dis->start++;
+		}
 		if ((int) dis->text_pos < dis->text->height)
 			texY = (int) dis->text_pos;
 		dis->text_pos += dis->step;
