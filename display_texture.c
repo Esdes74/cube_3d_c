@@ -6,14 +6,13 @@
 /*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:02:49 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/20 14:22:26 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:07:45 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 #include "display.h"
 
-#include <stdio.h>
 
 static void	init_texture(t_display *dis, t_raycasting *ray, \
 t_cube *cube);
@@ -34,7 +33,6 @@ void	display_texture(int *h, t_display *dis, t_raycasting *ray, t_cube *cube)
 		if ((int) dis->text_pos < dis->text->height)
 			texY = (int) dis->text_pos;
 		dis->text_pos += dis->step;
-		printf("texY = %d i = %ld\n", texY, ray->i);
 		mlx_pixel_put(cube->mlx, cube->win, ray->i, *h, \
 		dis->text->pix_img[texY][dis->text_x]);
 		*h += 1;

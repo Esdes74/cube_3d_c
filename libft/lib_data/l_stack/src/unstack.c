@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unstack.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eslamber <eslamber@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:52:09 by eslamber          #+#    #+#             */
-/*   Updated: 2023/02/25 17:05:32 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:08:01 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib_stack.h"
-#include <stdio.h>
 
 t_cell	*unstack(t_list *lst, int debug)
 {
