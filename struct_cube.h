@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_cube.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:04:45 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/11 18:13:03 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:13:37 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_cube
 	t_image	so;
 	t_image	we;
 	t_image	ea;
+	void	*screen;
 	void	*mlx;
 	void	*win;
 	char	**map;

@@ -6,7 +6,7 @@
 /*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/20 15:06:22 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:16:18 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	init_cube(t_cube *cube)
 	init_image(&cube->so);
 	init_image(&cube->we);
 	init_image(&cube->ea);
+	cube->screen = NULL;
 	cube->mlx = NULL;
 	cube->win = NULL;
 	cube->map = NULL;
@@ -70,8 +71,12 @@ static void	initialisation(t_cube *cube)
 	cube->mlx = mlx_init();
 	if (cube->mlx == NULL)
 		error(MLX, END);
+	cube->screen = mlx_new_image(cue->mlx, WIN_W, WIN_H);
+	if (cube->screen == NULL)
+		return (mlx_destroy_display(cube->mlx), free(cube->mlx), \
+	error(SCREEN, END));
 	cube->win = mlx_new_window(cube->mlx, WIN_W, WIN_H, NAME);
 	if (cube->win == NULL)
-		return (mlx_destroy_display(cube->mlx), free(cube->mlx), \
-	error(WIN, END));
+		return (mlx_destroy_image(cube->mlx, cube->screen), \
+	mlx_destroy_display(cube->mlx), free(cube->mlx), error(WIN, END));
 }
