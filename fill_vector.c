@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pix.c                                          :+:      :+:    :+:   */
+/*   fill_vector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/20 16:00:27 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/21 18:50:07 by eslamber         ###   ########.fr       */
+/*   Created: 2023/12/21 18:43:10 by eslamber          #+#    #+#             */
+/*   Updated: 2023/12/21 18:56:38 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "display.h"
 
-void	put_pix(t_image *im, int color, int x, int y)
+void	fill_vector(t_vector *v, double fst, double sec)
 {
-	char	*new;
-
-	new = im->img + (y * im->size + x * (im->bits / 8));
-	*(unsigned int *) new = color;
+	v->x = fst;
+	v->y = sec;
 }

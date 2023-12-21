@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eslamber <eslamber@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 12:59:41 by eslamber          #+#    #+#              #
-#    Updated: 2023/02/20 15:51:28 by eslamber         ###   ########.fr        #
+#    Updated: 2023/12/21 09:55:47 by estelamb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ MEM_LIB := ft_bzero.c \
 		   ft_memcmp.c \
 		   ft_memcpy.c \
 		   ft_memmove.c \
-		   ft_memset.c
+		   ft_memset.c \
+		   free_db_array.c \
+		   free_db_void_array.c
 MEM_LIB_H := $(LIB_MEM)lib_mem.h
 MEM_OBJ_LIB := $(MEM_LIB:%.c=$(LIB_MEM_OBJ)%.o)
 

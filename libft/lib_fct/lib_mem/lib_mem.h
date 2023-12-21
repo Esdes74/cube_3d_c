@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_mem.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eslamber <eslamber@student.42.ft>          +#+  +:+       +#+        */
+/*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:54:48 by eslamber          #+#    #+#             */
-/*   Updated: 2022/12/14 15:00:44 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/21 09:59:21 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,10 @@ int		ft_memcmp(const void *s, const void *c, size_t n);
 
 // Same as malloc but fill with 0
 void	*ft_calloc(size_t nbr, size_t size);
+
+// Free memory allocated to double array
+void	free_db_array(char **array);
+
+// Free memory allocated to double void array
+void	free_db_void_array(void **array, size_t x);
 #endif

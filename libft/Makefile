@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
+#    By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 15:42:31 by eslamber          #+#    #+#              #
-#    Updated: 2023/11/15 17:07:58 by eslamber         ###   ########.fr        #
+#    Updated: 2023/12/21 09:57:10 by estelamb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -163,7 +163,9 @@ MEM_LIB := ft_bzero.c \
 		   ft_memcmp.c \
 		   ft_memcpy.c \
 		   ft_memmove.c \
-		   ft_memset.c
+		   ft_memset.c \
+		   free_db_array.c \
+		   free_db_void_array.c
 MEM_LIB_H := $(LIB_MEM)lib_mem.h
 MEM_OBJ_LIB := $(MEM_LIB:%.c=$(LIB_MEM_OBJ)%.o)
 
@@ -203,8 +205,7 @@ STR_LIB := ft_atoi.c \
 		   ft_substr.c \
 		   ft_toupper.c \
 		   get_next_line_utils.c \
-		   get_next_line.c \
-		   free_db_array.c
+		   get_next_line.c
 STR_LIB_H := $(LIB_STR)lib_str.h \
 			 $(LIB_STR)lib_str.h
 STR_OBJ_LIB := $(STR_LIB:%.c=$(LIB_STR_OBJ)%.o)

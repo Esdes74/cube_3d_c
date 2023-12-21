@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_db_array.c                                    :+:      :+:    :+:   */
+/*   free_db_void_array.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 17:04:25 by eslamber          #+#    #+#             */
-/*   Updated: 2023/11/16 07:33:21 by eslamber         ###   ########.fr       */
+/*   Created: 2023/12/21 09:51:58 by estelamb          #+#    #+#             */
+/*   Updated: 2023/12/21 09:59:13 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib_str.h"
+#include "../lib_mem.h"
 
-void	free_db_array(char **array)
+void	free_db_void_array(void **array, size_t x)
 {
 	size_t	len;
 
 	len = 0;
-	while (array[len])
+	while (len < x)
 		free(array[len++]);
 	free(array);
 }

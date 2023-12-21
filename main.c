@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/20 17:30:12 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:49:50 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 #include "display.h"
+#include "key_events.h"
 
 static void	init_cube(t_cube *cube);
 static void	init_image(t_image *im);
@@ -19,14 +20,16 @@ static void	initialisation(t_cube *cube);
 
 int	main(int ac, char **av)
 {
-	t_cube	cube;
+	t_cube			cube;
+	t_raycasting	ray;
 
 	if (ac != 2)
 		error(NBR_ARG, END);
 	init_cube(&cube);
 	initialisation(&cube);
 	parsing(av[1], &cube);
-	raycasting(&cube);
+	raycasting(&ray, &cube);
+	key_events(&ray, &cube);
 	mlx_loop(cube.mlx);
 	free_all(&cube);
 	return (0);

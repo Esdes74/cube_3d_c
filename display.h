@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:43:44 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/20 14:13:32 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:56:36 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_display
 }	t_display;
 
 // Raytracing functions
-void	raycasting(t_cube *cube);
+void	raycasting(t_raycasting *ray, t_cube *cube);
 
 void	collision(t_raycasting *ray, t_cube *cube);
 
@@ -69,5 +69,7 @@ void	rotate_vector(t_vector *vec, double deg);
 
 void	display_texture(int *h, t_display *dis, t_raycasting *ray, \
 t_cube *cube);
+
+void	fill_vector(t_vector *v, double fst, double sec);
 
 #endif

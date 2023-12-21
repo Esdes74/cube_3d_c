@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:35:29 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/20 17:18:37 by estelamb         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:48:56 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ void	fill_dup(const long long int i, const long long int j, char **dup);
 
 void	encodage_texture(int fd, t_cube *cube);
 
+// MLX
+void	put_pix(t_image *im, int color, int x, int y);
+
 // Error gestion
 void	error(const t_error err, const t_mod mod);
 
@@ -96,7 +99,5 @@ void	free_all(t_cube *cube);
 
 // Utils function
 char	*pass_newline(const int fd, char *line);
-
-void	put_pix(t_image *im, int color, int x, int y);
 
 #endif

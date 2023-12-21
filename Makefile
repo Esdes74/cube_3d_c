@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+         #
+#    By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 16:40:33 by eslamber          #+#    #+#              #
-#    Updated: 2023/12/20 17:19:51 by estelamb         ###   ########.fr        #
+#    Updated: 2023/12/21 18:56:54 by eslamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 #
 
 # Compilation flags
-FLAGS := -Wall -Werror -Wextra -g3
+FLAGS := -Wall -Werror -Wextra
 CC := gcc
 
 FLAG_MLX := libft/minilibx/libmlx.a libft/minilibx/libmlx_Linux.a \
@@ -34,6 +34,7 @@ MLX := $(LIB_DIR)minilibx/libmlx.a
 NAME := cube3D
 HEADER := cube.h \
 		  display.h \
+		  key_events.h \
 		  struct_cube.h
 
 # Definition of files variables
@@ -50,10 +51,13 @@ SRC := main.c \
 	   descending_diffusion.c \
 	   fill_dup.c \
 	   raycasting.c \
+	   fill_vector.c \
 	   collision.c \
 	   display_texture.c \
 	   put_pix.c \
 	   rotate_vector.c \
+	   key_events.c \
+	   loop.c \
 	   utils.c
 OBJ := $(SRC:%.c=.obj/%.o)
 

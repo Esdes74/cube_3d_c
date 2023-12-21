@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pix.c                                          :+:      :+:    :+:   */
+/*   free_db_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: estelamb <estelamb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/20 16:00:27 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/21 18:50:07 by eslamber         ###   ########.fr       */
+/*   Created: 2023/11/15 17:04:25 by eslamber          #+#    #+#             */
+/*   Updated: 2023/12/21 09:52:15 by estelamb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "../lib_mem.h"
 
-void	put_pix(t_image *im, int color, int x, int y)
+void	free_db_array(char **array)
 {
-	char	*new;
+	size_t	len;
 
-	new = im->img + (y * im->size + x * (im->bits / 8));
-	*(unsigned int *) new = color;
+	len = 0;
+	while (array[len])
+		free(array[len++]);
+	free(array);
 }

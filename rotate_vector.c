@@ -6,11 +6,13 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:03:52 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/07 16:06:28 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:50:15 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
+
+#include <stdio.h>
 
 void	rotate_vector(t_vector *vec, double deg)
 {
