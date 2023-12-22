@@ -6,14 +6,12 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 09:35:58 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/21 18:49:38 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:26:49 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 #include "key_events.h"
-
-#include <stdio.h>
 
 static int	key_down(int keycode, t_key_event *key);
 static int	key_up(int keycode, t_key_event *key);
@@ -50,9 +48,9 @@ static int	key_down(int keycode, t_key_event *key)
 	else if (keycode == k_s)
 		key->up = -1;
 	else if (keycode == k_a)
-		key->lat = -1;
-	else if (keycode == k_d)
 		key->lat = 1;
+	else if (keycode == k_d)
+		key->lat = -1;
 	return (0);
 }
 

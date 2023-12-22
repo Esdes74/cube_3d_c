@@ -6,13 +6,11 @@
 /*   By: eslamber <eslamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 17:17:11 by eslamber          #+#    #+#             */
-/*   Updated: 2023/12/21 18:56:23 by eslamber         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:04:23 by eslamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
-
-#include <stdio.h>
 
 static int	encodage_couleur(t_color col);
 
